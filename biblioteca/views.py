@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+# Funcion de prueba
+def funcion_prueba(request):
+    pass
