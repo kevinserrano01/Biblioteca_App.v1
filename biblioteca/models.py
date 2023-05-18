@@ -18,3 +18,6 @@ class PrestamoLibro(models.Model):
         Libro,
         on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return f'{self.fecha_prestamos} - {self.fecha_devolucion}'
