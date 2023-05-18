@@ -2,8 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Autor(models.Model):
-    pass
+
 
 class Libro(models.Model):
     titulo=models.CharField(max_length=80) #consulta si ponemos longitud
