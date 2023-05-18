@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
-# Funcion de prueba
-def funcion_prueba(request):
+# Funcion de prueba de Kev
+def funcion_prueba_Kev(request):
     pass
