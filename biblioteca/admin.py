@@ -4,7 +4,7 @@ from biblioteca.models import Autor,Libro ##
 
 class LibroAdmin(admin.ModelAdmin):
     model=Libro
-    list_display=("id","titulo","descripcion","isbn","activo","autor")
+    list_display=("id","titulo","descripcion","isbn","autor","activo")
     search_fields=("titulo","autor__nombre")
     list_filter=("autor__nombre",)
 
