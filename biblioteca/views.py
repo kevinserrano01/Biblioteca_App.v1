@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def funcioGus(request):
+    pass
+#prueba  las 00.33 am
