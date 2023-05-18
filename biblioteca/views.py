@@ -1,5 +1,5 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from biblioteca.models import models Empleado
 
 # Create your views here.
-def funcion_Luis_prueba(request):
-    pass
