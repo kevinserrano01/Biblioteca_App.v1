@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from biblioteca.models import models Empleado
+from biblioteca.models import Empleado
 from biblioteca.forms import CrearNuevoEmpleado
 
 
