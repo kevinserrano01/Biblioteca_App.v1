@@ -44,12 +44,13 @@ def activar_Registro_Empleado(request, empleado_id):
 def nuevo_empleado(request):
     """CREA NUEVO EMPLEADO"""
     if request.method == 'GET':
-        return render(request, 'nuevo_proveedor.html', {
+        return render(request, 'nuevo_empleado.html', {
             'formularioEmpleado': CrearNuevoEmpleado()
         })
     else:
         nombreEmpleado = request.POST['nombre']
         apellidoEmpleado = request.POST['apellido']
         legajoEmpleado = request.POST['nro_legajo']
-        Empleado.objects.create(nombre=nombreEmpleado, apellido=apellidoEmpleado, nro_legajo=legajoEmpleado)
+        activos = True
+        Empleado.objects.create(nombre=nombreEmpleado, apellido=apellidoEmpleado, nro_legajo=legajoEmpleado, activo=activos)
         return redirect('listado_empleados')  # redirecciona a la url con el name='listado_empleados' en urls.py
