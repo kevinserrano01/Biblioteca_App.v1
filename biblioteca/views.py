@@ -1,10 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from biblioteca.models import models Empleado
+from biblioteca.models import Empleado
 
-# Create your views here.
-def funcion_prueba_Andy(request):
-    pass
+
+
 
 
 # Funcion de Kev
