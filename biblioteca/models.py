@@ -53,11 +53,11 @@ class PrestamoLibro(models.Model):
         Socio,
         on_delete=models.CASCADE
     )
-    empleado: models.ForeignKey(
+    empleado = models.ForeignKey(
         Empleado,
         on_delete=models.CASCADE
     )
-    libro: models.ForeignKey(
+    libro = models.ForeignKey(
         Libro,
         on_delete=models.CASCADE
     )
