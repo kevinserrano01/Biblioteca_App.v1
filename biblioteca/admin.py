@@ -21,7 +21,7 @@ admin.site.register(Empleado, EmpleadoAdmin)
 class SocioAdmin(admin.ModelAdmin):
     model=Socio
     list_display=("id","nombre","apellido","activo")
-    search_fields=("nombre",)
+    search_fields=("nombre", "apellido")
     list_filter=("activo",)
     
 
