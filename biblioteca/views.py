@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from biblioteca.models import models Empleado
+from biblioteca.models import Empleado
 from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado
 
@@ -17,7 +17,7 @@ def actualizar_empleado(request, empleado_id):
     if request.method == "POST":
         empleado.nombre = request.POST["nombre"]
         empleado.apellido = request.POST["apellido"]
-        empleado.numero_legajo = request.POST["numero_legajo"]
+        empleado.nro_legajo = request.POST["numero_legajo"]
         empleado.activo = True if request.POST.get("activo") == "on" else False
         empleado.save()
 
@@ -26,7 +26,7 @@ def actualizar_empleado(request, empleado_id):
         }
     return render(request, "formulario_actualizar_empleado.html", context)
 
-  
+
 def listado_empleados(request):
     empleados=Empleado.objects.all()
     context={
