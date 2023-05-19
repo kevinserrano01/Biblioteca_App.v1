@@ -15,6 +15,5 @@ def listado_empleados(request):
     empleados=Empleado.objects.all()
     context={
         "empleados":empleados,
-
     }
     return render(request, "Empleados_lista.html", context)
