@@ -7,7 +7,7 @@ class Empleado(models.Model):
      numero_legajo:models.IntegerField
      activo:models.BooleanField
      def __str__(self):
-     return f'{self.nombre} - {self.apellido} - {self.numero_legajo} - {self.activo}'
+        return f'{self.nombre} - {self.apellido} - {self.numero_legajo} - {self.activo}'
 
 # Tarea de Kev
 class PrestamoLibro(models.Model):
