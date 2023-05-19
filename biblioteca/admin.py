@@ -20,11 +20,6 @@ class SocioAdmin(admin.ModelAdmin):
     search_fields=("nombre", "apellido")
     list_filter=("activo",)
 
-class PrestamoLibroAdmin(admin.ModelAdmin):
-    model = PrestamoLibro
-    list_display=("nombre",)
-    search_fields=("socio", "libro", "empleado",)
-
 admin.site.register(Socio, SocioAdmin)
 admin.site.register(Libro, RegistroModeloLibro)
 admin.site.register(PrestamoLibro, PrestamoLibroAdmin)
