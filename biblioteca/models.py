@@ -65,4 +65,3 @@ class PrestamoLibro(models.Model):
 
     def __str__(self):
         return f'{self.fecha_prestamos} - {self.fecha_devolucion}'
-
