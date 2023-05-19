@@ -17,3 +17,10 @@ def listado_empleados(request):
         "empleados":empleados,
     }
     return render(request, "Empleados_lista.html", context)
+
+def activar_Registro_Empleado(request, empleado_id):
+    """Funcion que activa un registro de empleado"""
+    empleado = Empleado.objects.get(id=empleado_id)
+    empleado.activo = True
+    empleado.save()
+    return HttpResponse(f'El empleado con el ID: {empleado_id} fue ELIMINADO!')
