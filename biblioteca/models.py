@@ -38,10 +38,9 @@ class Libro(models.Model):
     autor=models.ForeignKey(
         Autor,
         related_name="libros",
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE)
     activo=models.BooleanField(default=True)
 
-    )
     def __str__(self):
         return f"{self.titulo} - {self.autor}"
 
