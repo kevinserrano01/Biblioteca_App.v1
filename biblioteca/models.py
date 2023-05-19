@@ -2,6 +2,25 @@ from django.db import models
 
 
 
+
+
+#Modelo libro byGus
+class Libro(models.Model):
+    titulo=models.CharField(max_length=80) 
+    descripcion=models.CharField(max_length=180) 
+    isbn=models.IntegerField(default=0)
+    autor=models.ForeignKey(
+        Autor,
+        related_name="libros",
+        on_delete=models.CASCADE,
+    activo=models.BooleanField(default=True)
+
+    )
+    def __str__(self):
+        return f"{self.titulo} - {self.autor}"
+
+
+
 # Tarea de Kev
 class PrestamoLibro(models.Model):
     fecha_prestamos = models.DateField()
