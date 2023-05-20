@@ -9,7 +9,7 @@ def desactivar_Registro_Empleado(request, empleado_id):
     empleado = Empleado.objects.get(id=empleado_id)
     empleado.activo = False
     empleado.save()
-    return HttpResponse(f'El empleado con el ID: {empleado_id} fue ELIMINADO!')
+    return redirect("listado_empleados")
 
 # funcion de Luis
 def actualizar_empleado(request, empleado_id):
@@ -39,7 +39,7 @@ def activar_Registro_Empleado(request, empleado_id):
     empleado = Empleado.objects.get(id=empleado_id)
     empleado.activo = True
     empleado.save()
-    return HttpResponse(f'El empleado con el ID: {empleado_id} fue ELIMINADO!')
+    return redirect("listado_empleados")
 
 def nuevo_empleado(request):
     """CREA NUEVO EMPLEADO"""
