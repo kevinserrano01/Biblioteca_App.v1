@@ -1,18 +1,14 @@
 import os
 from pathlib import Path
-import environ
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env() # crear variables
-environ.Env.read_env() # leer variables
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY') # Protegemos la variable de ambiente
+SECRET_KEY = 'django-insecure-@oaorq=h0q&9odzl8^p-hbf2v603-xe32c5zr+zxg4(7^9t^hc' # Protegemos la variable de ambiente
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') # Protegemos la variable de ambiente
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -44,7 +40,7 @@ ROOT_URLCONF = 'WebApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
