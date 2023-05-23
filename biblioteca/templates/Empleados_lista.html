@@ -16,7 +16,6 @@
         <h1 class="text-center">Listado Empleados</h1>
         <div class="row">
             <div class="colum">
-                {% for empleado in empleados %}
                 <table border="1" class="table table-striped container mt-2">
                     <tr>
                         <th scope="col"> ID </th>
@@ -29,6 +28,7 @@
                         <th scope="col">  </th>
                     </tr>
                     <!-- MOSTRAR DATOS DE LA BASE DE DATOS EN EL HTML --------------------------------------------->
+                    {% for empleado in empleados %}
                         <tr>
                             <td> {{empleado.id}} </td>
                             <td> {{empleado.nombre}} </td>
@@ -80,8 +80,8 @@
                         <div class="alert alert-danger " role="alert">
                             Sin empleados...
                         </div>
+                    {% endfor %}
                 </table>
-                {% endfor %}
             </div>
         </div>
     </div>
