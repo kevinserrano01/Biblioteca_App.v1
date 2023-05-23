@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from biblioteca.models import Empleado, Autor
+from biblioteca.models import Empleado, Autor, Socio
 from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado
 
@@ -62,3 +62,17 @@ def desactivar_Registro_Autor(request, autor_id):
     autor.activo = False
     autor.save()
     return redirect("listado_autores")
+# Funcion de Gus (modificar datos socio)
+def actualizar_socios(request, socio_id):
+    socio = get_object_or_404(Socio, pk=socio_id)   
+    if request.method == "POST":
+        socio.nombre = request.POST["nombre"]
+        socio.apellido = request.POST["apellido"]
+        fecha_nacimiento = request.POST["fecha_nacimiento"]
+        socio.activo = True if request.POST.get("activo") == "on" else False
+        socio.save()
+
+    context = {
+            'empleado': empleado,
+        }
+    return render(request, "formulario_actualizar_empleado.html", context)
