@@ -62,6 +62,7 @@ def desactivar_Registro_Autor(request, autor_id):
     autor.activo = False
     autor.save()
     return redirect("listado_autores")
+
 # Funcion de Gus (modificar datos socio)
 def actualizar_socios(request, socio_id):
     socio = get_object_or_404(Socio, pk=socio_id)   
@@ -73,6 +74,6 @@ def actualizar_socios(request, socio_id):
         socio.save()
 
     context = {
-            'empleado': empleado,
+            'socio': socio,
         }
-    return render(request, "formulario_actualizar_empleado.html", context)
+    return render(request, "formulario_actualizar_socio.html", context)
