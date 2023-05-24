@@ -7,4 +7,7 @@ urlpatterns = [
     path('empleados/crear_empleado/', views.nuevo_empleado, name='nuevo_empleado'),
     path('actualizar_empleado/<int:empleado_id>/', views.actualizar_empleado, name='actualizar_empleado'),
     path('empleados/activar/<int:empleado_id>', views.activar_Registro_Empleado, name='activar_Registro_Empleado'),
+    path('autores/activar/<int:autor_id>/', views.activar_registro_autor, name='activar_registro_autor'),
+    path('socios/desactivar/<int:socio_id>/', views.desactivar_registro_socio, name='desactivar_registro_socio'),
+
 ]
