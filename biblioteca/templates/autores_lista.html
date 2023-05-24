@@ -60,14 +60,14 @@
                                 </a>
                             </td>
                             <td>
-                                {% if empleado.activo %}
-                                    <a href=" ">
+                                {% if autor.activo %}
+                                    <a href=" {% url 'desactivar_Registro_Autor' autor.id %} ">
                                         <button type="button" class="btn btn-secondary rounded-pill">
                                             Desactivar
                                         </button>
                                     </a>
                                 {% else %}
-                                    <a href=" ">
+                                    <a href="">
                                         <button type="button" class="btn btn-success rounded-pill">
                                             Activar
                                         </button>

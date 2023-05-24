@@ -11,11 +11,11 @@
     {% extends 'navbar.html' %}
 
     {% block content %}
-    <div class="container">
+    <div class="container text-center">
         <h1 class="mb-4 ">Crear nuevo Empleado</h1>
-        <form method="post" class="form-control">
+        <form method="post" class="form-control text-center">
             {% csrf_token %}
-            <div class="col-6">
+            <div class="col-12">
                 {{ formularioEmpleado.as_p }}
             </div>
             
