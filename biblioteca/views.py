@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from biblioteca.models import Empleado
+from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado
 
@@ -54,3 +54,19 @@ def nuevo_empleado(request):
         activos = True
         Empleado.objects.create(nombre=nombreEmpleado, apellido=apellidoEmpleado, nro_legajo=legajoEmpleado, activo=activos)
         return redirect('listado_empleados')  # redirecciona a la url con el name='listado_empleados' en urls.py
+
+# Kev
+def listado_autores(request):
+    autores = Autor.objects.all()
+    context={
+        "autores":autores,
+    }
+    return render(request, "autores_lista.html", context)
+
+# Kev
+def activar_Registro_Socio(request, socio_id):
+    """Funcion que activa un registro de socio"""
+    socio = Socio.objects.get(id=socio_id)
+    socio.activo = True
+    socio.save()
+    return redirect("listado_socios")
