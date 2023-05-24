@@ -55,18 +55,24 @@ def nuevo_empleado(request):
         Empleado.objects.create(nombre=nombreEmpleado, apellido=apellidoEmpleado, nro_legajo=legajoEmpleado, activo=activos)
         return redirect('listado_empleados')  # redirecciona a la url con el name='listado_empleados' en urls.py
 
-# Kev
-def listado_autores(request):
-    autores = Autor.objects.all()
-    context={
-        "autores":autores,
-    }
-    return render(request, "autores_lista.html", context)
+# Funcion de Gus (desactivar autor)
+def desactivar_Registro_Autor(request, autor_id):
+    autor = Autor.objects.get(id=autor_id)
+    autor.activo = False
+    autor.save()
+    return redirect("listado_autores")
 
-# Kev
-def activar_Registro_Socio(request, socio_id):
-    """Funcion que activa un registro de socio"""
-    socio = Socio.objects.get(id=socio_id)
-    socio.activo = True
-    socio.save()
-    return redirect("listado_socios")
+# Funcion de Gus (modificar datos socio)
+def actualizar_socios(request, socio_id):
+    socio = get_object_or_404(Socio, pk=socio_id)   
+    if request.method == "POST":
+        socio.nombre = request.POST["nombre"]
+        socio.apellido = request.POST["apellido"]
+        fecha_nacimiento = request.POST["fecha_nacimiento"]
+        socio.activo = True if request.POST.get("activo") == "on" else False
+        socio.save()
+
+    context = {
+            'socio': socio,
+        }
+    return render(request, "formulario_actualizar_socio.html", context)
