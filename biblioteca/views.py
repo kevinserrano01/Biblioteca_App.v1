@@ -64,7 +64,7 @@ def activar_registro_autor(request, autor_id):
     return redirect("listado_autores")
 
 
-# funcion de Luis
+# funcion de Luis Alberto
 def desactivar_registro_socio(request, socio_id):
     socio = Socio.objects.get(id=socio_id)
     socio.activo = False
