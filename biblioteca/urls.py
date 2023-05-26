@@ -12,4 +12,6 @@ urlpatterns = [
     path('autores/desactivar/<int:autor_id>', views.desactivar_Registro_Autor, name='desactivar_Registro_Autor'),
     path('socios/listado/', views.listado_socios, name="listado_socios"),
     path('autores/modificar/<int:autor_id>', views.actualizar_autor, name='actualizar_autor'),
+    path('autores/nuevo', views.reg_nuevAutores, name='nuevos_Autores'),
+    path('socios/nuevo', views.reg_nuevSocios, name='nuevos_Socios'),
 ]
