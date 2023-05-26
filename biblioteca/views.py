@@ -121,15 +121,13 @@ def reg_nuevAutores(request):
         nombre=request.POST['nombre']
         apellido=request.POST['apellido']
         nacionalidad=request.POST['nacionalidad']
-        activo=request.POST['activo']
 
         Autor.objects.create(
             nombre=nombre,
             apellido=apellido,
-            nacionalidad=nacionalidad,
-            activo=activo
+            nacionalidad=nacionalidad
         )
-    return render(request,'',context)
+    return render(request,'nuevo_autor.html')
 
 #Andrea
 def reg_nuevSocios(request):
@@ -138,12 +136,10 @@ def reg_nuevSocios(request):
         nombre=request.POST['nombre']
         apellido=request.POST['apellido']
         fecha_nacimiento = request.POST['fecha_nacimiento']
-        activo=request.POST['activo']
 
         Autor.objects.create(
             nombre=nombre,
             apellido=apellido,
-            fecha_nacimiento=fecha_nacimiento,
-            activo=activo
+            fecha_nacimiento=fecha_nacimiento
         )
-    return render(request,'',context)
+    return render(request,'nuevo_socio.html')
