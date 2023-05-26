@@ -16,7 +16,6 @@
         <h1 class="text-center">Listado Autores</h1>
         <div class="row">
             <div class="colum">
-                {% for autor in autores %}
                 <table border="1" class="table table-striped container mt-2">
                     <tr>
                         <th scope="col"> ID </th>
@@ -24,16 +23,19 @@
                         <th scope="col"> Apellido </th>
                         <th scope="col"> Nacionalidad </th>
                         <th scope="col"> Estado </th>
-                        <th scope="col">  </th>
-                        <th scope="col">  </th>
-                        <th scope="col">  </th>
+                        
+                        <th scope="col"> Editar </th>
+                        <th scope="col"> Eliminar </th>
+                        <th scope="col"> Acción </th>
                     </tr>
+                    {% for autor in autores %}
                     <!-- MOSTRAR DATOS DE LA BASE DE DATOS EN EL HTML --------------------------------------------->
                         <tr>
                             <td> {{autor.id}} </td>
                             <td> {{autor.nombre}} </td>
                             <td> {{autor.apellido}} </td>
                             <td> {{autor.nacionalidad}} </td>
+                            
                             <td>
                                 {% if autor.activo %}
                                     <p>Activo</p>
