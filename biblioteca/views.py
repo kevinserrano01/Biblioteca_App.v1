@@ -128,3 +128,31 @@ def desactivar_registro_socio(request, socio_id):
     socio.activo = False
     socio.save()
     return render(request, 'mensaje_desactivacion_socio.html')
+
+# Andrea
+def reg_nuevAutores(request):
+    if request.POST:
+        nombre=request.POST['nombre']
+        apellido=request.POST['apellido']
+        nacionalidad=request.POST['nacionalidad']
+
+        Autor.objects.create(
+            nombre=nombre,
+            apellido=apellido,
+            nacionalidad=nacionalidad
+        )
+    return render(request,'nuevo_autor.html')
+
+# Andrea
+def reg_nuevSocios(request):
+    if request.POST:
+        nombre=request.POST['nombre']
+        apellido=request.POST['apellido']
+        fecha_nacimiento = request.POST['fecha_nacimiento']
+
+        Autor.objects.create(
+            nombre=nombre,
+            apellido=apellido,
+            fecha_nacimiento=fecha_nacimiento
+        )
+    return render(request,'nuevo_socio.html')
