@@ -113,3 +113,37 @@ def actualizar_autor(request, autor_id):
     else:
         form = ActualizarAutor(instance = autor)
     return render(request, 'actualizar_autor.html', {"form": form})
+
+#Andrea
+def reg_nuevAutores(request):
+
+    if request.POST:
+        nombre=request.POST['nombre']
+        apellido=request.POST['apellido']
+        nacionalidad=request.POST['nacionalidad']
+        activo=request.POST['activo']
+
+        Autor.objects.create(
+            nombre=nombre,
+            apellido=apellido,
+            nacionalidad=nacionalidad,
+            activo=activo
+        )
+    return render(request,'',context)
+
+#Andrea
+def reg_nuevSocios(request):
+
+    if request.POST:
+        nombre=request.POST['nombre']
+        apellido=request.POST['apellido']
+        fecha_nacimiento = request.POST['fecha_nacimiento']
+        activo=request.POST['activo']
+
+        Autor.objects.create(
+            nombre=nombre,
+            apellido=apellido,
+            fecha_nacimiento=fecha_nacimiento,
+            activo=activo
+        )
+    return render(request,'',context)
