@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor
 from django.http import HttpResponseRedirect
 
-# Funcion de Kev
+# Kev
 def desactivar_Registro_Empleado(request, empleado_id):
     empleado = Empleado.objects.get(id=empleado_id)
     empleado.activo = False
@@ -35,6 +35,7 @@ def listado_empleados(request):
     }
     return render(request, "Empleados_lista.html", context)
 
+# Kev
 def activar_Registro_Empleado(request, empleado_id):
     """Funcion que activa un registro de empleado"""
     empleado = Empleado.objects.get(id=empleado_id)
@@ -42,6 +43,7 @@ def activar_Registro_Empleado(request, empleado_id):
     empleado.save()
     return redirect("listado_empleados")
 
+# Kev
 def nuevo_empleado(request):
     """CREA NUEVO EMPLEADO"""
     if request.method == 'GET':
