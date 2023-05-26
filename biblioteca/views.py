@@ -113,3 +113,18 @@ def actualizar_autor(request, autor_id):
     else:
         form = ActualizarAutor(instance = autor)
     return render(request, 'actualizar_autor.html', {"form": form})
+
+# funcion de Luis
+def activar_registro_autor(request, autor_id):
+    autor = Autor.objects.get(id=autor_id)
+    autor.activo = True
+    autor.save()
+    return redirect("listado_autores")
+
+
+# funcion de Luis Alberto
+def desactivar_registro_socio(request, socio_id):
+    socio = Socio.objects.get(id=socio_id)
+    socio.activo = False
+    socio.save()
+    return render(request, 'mensaje_desactivacion_socio.html')
