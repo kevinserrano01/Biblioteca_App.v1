@@ -15,3 +15,15 @@ class ActualizarSocio(forms.Form): # Kev
     class Meta:
         model = Socio
         fields = ('__all__')
+
+
+class CrearNuevoAutor(forms.Form):
+    nombre = forms.CharField(label='Nombre del autor', max_length=50)
+    apellido = forms.CharField(label='Apellido del autor', max_length=50)
+    nacionalidad = forms.CharField(label='Numero de legajo', max_length=50)
+
+
+class CrearNuevoSocio(forms.Form):
+    nombre = forms.CharField(label='Nombre del autor', max_length=50)
+    apellido = forms.CharField(label='Apellido del autor', max_length=50)
+    fecha_nacimiento = forms.DateField(label='Fecha de nacimiento')
