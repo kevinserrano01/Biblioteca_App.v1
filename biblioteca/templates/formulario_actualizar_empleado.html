@@ -12,7 +12,7 @@
     {% extends 'navbar.html' %}
 
     {% block content %}
-    <div class="container text-center">
+    <div class="container text-center text-center">
         <form method="POST">
             {% csrf_token %}
             <div class="row">
@@ -40,6 +40,10 @@
                 <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
             </a>
         </div>
+
+        <a href=" {% url 'listado_empleados' %} " class="justify-content-center">
+            <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
+        </a>
     </div>
     {% endblock %}
 

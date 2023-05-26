@@ -92,3 +92,11 @@ def activar_Registro_Socio(request, socio_id):
     socio.activo = True
     socio.save()
     return redirect("listado_socios")
+
+#Nai
+def listado_socios(request):
+    socios = Socio.objects.all()
+    context = {
+        "socios": socios,
+    }
+    return render(request, "Socios_lista.html", context)
