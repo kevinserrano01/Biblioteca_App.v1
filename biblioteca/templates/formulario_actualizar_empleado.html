@@ -12,23 +12,34 @@
     {% extends 'navbar.html' %}
 
     {% block content %}
-    <div class="container text-center">
+    <div class="container text-center text-center">
         <form method="POST">
             {% csrf_token %}
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" value="{{ empleado.nombre }}" required>
-        
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" value="{{ empleado.apellido }}" required>
-        
-            <label for="numero_legajo">Número de legajo:</label>
-            <input type="text" id="numero_legajo" name="numero_legajo" value="{{ empleado.numero_legajo }}" required>
-        
-            <label for="activo">Activo:</label>
-            <input type="checkbox" id="activo" name="activo" {% if empleado.activo %}checked{% endif %}>
-        
-            <button type="submit">Actualizar</button>
+            <div class="row">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="{{ empleado.nombre }}" required>
+            </div>
+            <div class="row">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value="{{ empleado.apellido }}" required>
+            </div>
+            <div class="row">
+                <label for="numero_legajo">Número de legajo:</label>
+                <input type="text" id="numero_legajo" name="numero_legajo" value="{{ empleado.numero_legajo }}" required>
+            </div>
+            <div class="row">
+                <label for="activo">Activo:</label>
+                <input type="checkbox" id="activo" name="activo" {% if empleado.activo %}checked{% endif %}>
+            </div>
+            <div class="row">
+                <button type="submit">Actualizar</button>
+            </div>
         </form>
+        <div class="row">
+            <a href=" {% url 'listado_autores' %} ">
+                <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
+            </a>
+        </div>
 
         <a href=" {% url 'listado_empleados' %} " class="justify-content-center">
             <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
