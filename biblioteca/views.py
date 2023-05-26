@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor
+from django.http import HttpResponseRedirect
 
 # Funcion de Kev
 def desactivar_Registro_Empleado(request, empleado_id):
@@ -100,3 +101,15 @@ def listado_socios(request):
         "socios": socios,
     }
     return render(request, "Socios_lista.html", context)
+
+#Nai
+def actualizar_autor(request, autor_id):
+    autor = get_object_or_404(Autor, id=autor_id)
+    if request.method == "POST":
+        form = ActualizarAutor(request.POST, instance = autor)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/autores/listado')
+    else:
+        form = ActualizarAutor(instance = autor)
+    return render(request, 'actualizar_autor.html', {"form": form})
