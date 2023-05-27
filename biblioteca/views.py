@@ -137,11 +137,13 @@ def reg_nuevAutores(request):
         nombre=request.POST['nombre']
         apellido=request.POST['apellido']
         nacionalidad=request.POST['nacionalidad']
+        activo = True
 
         Autor.objects.create(
             nombre=nombre,
             apellido=apellido,
-            nacionalidad=nacionalidad
+            nacionalidad=nacionalidad,
+            activo = activo
         )
     return render(request,'nuevo_autor.html')
 
