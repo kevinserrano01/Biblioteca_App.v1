@@ -5,6 +5,11 @@ from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor
 from django.http import HttpResponseRedirect
 
+#Nai
+def home(request):
+    
+    return render(request, "home.html")
+
 # Kev
 def desactivar_Registro_Empleado(request, empleado_id):
     empleado = Empleado.objects.get(id=empleado_id)
