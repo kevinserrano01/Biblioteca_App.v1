@@ -13,9 +13,11 @@
     {% block content %}
     <div class="container text-center">
         <h1 class="mb-4 text-center">Crear Nuevo Autor</h1>
-        <form method="post">
+        <form method="post" class="form-control text-center">
             {% csrf_token %}
-            {{ formulario_autor.as_p }}
+            <div class="col-12">
+                {{ formularioautor.as_p }}
+            </div>
             <button type="submit" class="btn btn-outline-success mt-4">Guardar</button>
         </form>
 
