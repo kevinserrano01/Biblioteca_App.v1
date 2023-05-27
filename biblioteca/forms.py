@@ -18,9 +18,9 @@ class ActualizarSocio(forms.Form): # Kev
 
 
 class CrearNuevoAutor(forms.Form):
-    nombre = forms.CharField(label='Nombre del autor', max_length=50)
-    apellido = forms.CharField(label='Apellido del autor', max_length=50)
-    nacionalidad = forms.CharField(label='Numero de legajo', max_length=50)
+    nombre = forms.CharField(label='Nombre del autor', max_length=200)
+    apellido = forms.CharField(label='Apellido del autor', max_length=200)
+    nacionalidad = forms.CharField(label='Nacionalidad', max_length=200)
 
 
 class CrearNuevoSocio(forms.Form):

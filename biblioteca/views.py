@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor
 from django.http import HttpResponseRedirect
 
 # Kev
@@ -133,17 +133,24 @@ def desactivar_registro_socio(request, socio_id):
 
 # Andrea
 def reg_nuevAutores(request):
-    if request.POST:
+    if request.method == 'GET':
+        return render(request, 'nuevo_autor.html', {
+            'formularioautor': CrearNuevoAutor()
+        })
+    else:
+        #request.POST:
         nombre=request.POST['nombre']
         apellido=request.POST['apellido']
         nacionalidad=request.POST['nacionalidad']
+        activo = True
 
         Autor.objects.create(
             nombre=nombre,
             apellido=apellido,
-            nacionalidad=nacionalidad
+            nacionalidad=nacionalidad,
+            activo = activo
         )
-    return render(request,'nuevo_autor.html')
+    return redirect('listado_autores')
 
 # Andrea
 def reg_nuevSocios(request):
