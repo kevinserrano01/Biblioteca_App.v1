@@ -15,11 +15,11 @@
         <h1 class="mb-4 text-center">Actualizar Socio</h1>
         <form method="post">
             {% csrf_token %}
-            {{ formularioActualizarSocio.as_p }}
-            <button type="submit" class="btn btn-outline-success mt-4"">Guardar</button>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-success mt-4">Guardar</button>
         </form>
 
-        <a href=" {% url 'listado_autores' %} ">
+        <a href=" {% url 'listado_socios' %} ">
             <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
         </a>
     </div>

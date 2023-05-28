@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, ActualizarSocio, CrearNuevoSocio
 from django.http import HttpResponseRedirect
 
 # Kev
@@ -67,18 +67,15 @@ def desactivar_Registro_Autor(request, autor_id):
 
 # Funcion de Gus (modificar datos socio)
 def actualizar_socios(request, socio_id):
-    socio = get_object_or_404(Socio, pk=socio_id)   
+    socio = get_object_or_404(Socio, id=socio_id)  
     if request.method == "POST":
-        socio.nombre = request.POST["nombre"]
-        socio.apellido = request.POST["apellido"]
-        fecha_nacimiento = request.POST["fecha_nacimiento"]
-        socio.activo = True if request.POST.get("activo") == "on" else False
-        socio.save()
-
-    context = {
-            'socio': socio,
-        }
-    return render(request, "formulario_actualizar_socio.html", context)
+        form = ActualizarSocio(request.POST, instance = socio)
+        if form.is_valid():
+            socio.save()
+            return HttpResponseRedirect('/biblioteca/socios/listado/')
+    else:
+        form=ActualizarSocio()
+    return render(request, 'actualizar_socio.html', {"form":form})
 
 # Kev
 def listado_autores(request):
@@ -154,14 +151,20 @@ def reg_nuevAutores(request):
 
 # Andrea
 def reg_nuevSocios(request):
-    if request.POST:
+    if request.method == 'GET':
+        return render(request, 'nuevo_socio.html', {
+            'formulario_nuevSocio': CrearNuevoSocio()
+        })
+    else:
         nombre=request.POST['nombre']
         apellido=request.POST['apellido']
-        fecha_nacimiento = request.POST['fecha_nacimiento']
+        fecha_nacimiento=request.POST['fecha_nacimiento']
+        activo = True
 
-        Autor.objects.create(
+        Socio.objects.create(
             nombre=nombre,
             apellido=apellido,
-            fecha_nacimiento=fecha_nacimiento
+            fecha_nacimiento=fecha_nacimiento,
+            activo=activo
         )
-    return render(request,'nuevo_socio.html')
+    return redirect('listado_socios')
