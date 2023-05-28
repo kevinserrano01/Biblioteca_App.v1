@@ -11,7 +11,7 @@ class ActualizarAutor(forms.ModelForm): # Kev
         model = Autor
         fields = ('__all__') # Editar todos sus caracteristicas
 
-class ActualizarSocio(forms.Form): # Kev
+class ActualizarSocio(forms.ModelForm): # Kev
     class Meta:
         model = Socio
         fields = ('__all__')
@@ -26,4 +26,4 @@ class CrearNuevoAutor(forms.Form):
 class CrearNuevoSocio(forms.Form):
     nombre = forms.CharField(label='Nombre del autor', max_length=50)
     apellido = forms.CharField(label='Apellido del autor', max_length=50)
-    fecha_nacimiento = forms.DateField(label='Fecha de nacimiento')
+    fecha_nacimiento = forms.DateField(label='Fecha de nacimiento (YYYY-MM-DD)')
