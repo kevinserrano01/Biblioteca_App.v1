@@ -16,5 +16,5 @@ urlpatterns = [
     path('socios/desactivar/<int:socio_id>/', views.desactivar_registro_socio, name='desactivar_registro_socio'),
     path('autores/nuevo/', views.reg_nuevAutores, name='nuevos_Autores'),
     path('socios/nuevo/', views.reg_nuevSocios, name='nuevos_Socios'),
-    path('socios/actualziar/<int:socio_id>', views.actualizar_socios, name='actualizar_socio')
+    path('socios/actualizar/<int:socio_id>', views.actualizar_socios, name='actualizar_socio')
 ]
