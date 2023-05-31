@@ -176,6 +176,14 @@ def reg_nuevSocios(request):
 
 # Kev
 def nuevo_libro(request):
+    """Funcion que crea un nuevo libro y lo guarda en la base de datos.
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        redirec: Redirecciona al template listado_libros una vez creado el libro.
+    """
     if request.method == 'GET':
         return render(request, 'nuevo_libro.html', {
             'formulario_libro': CrearNuevoLibro()
@@ -197,7 +205,7 @@ def nuevo_libro(request):
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
     """Funcion que actualiza un registro de un prestamo de libro en el sistema.
-    
+
     Args:
         prestamoLibro_id (int): id de un prestamo.
     """
