@@ -180,3 +180,11 @@ def activar_registro_libro(request, libro_id):
     libro.activo = False
     libro.save()
     return redirect("listado_libro")
+
+
+def listado_libros(request):
+    libros=Libro.objects.all()
+    context={
+        "libros":libros,
+    }
+    return render(request, "libros_lista.html", context) #chequear que esa el html
