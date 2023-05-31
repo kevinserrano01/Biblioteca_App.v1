@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoLibro
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoLibro, ActualizarPrestamoLibro
 from django.http import HttpResponseRedirect
 
 #Nai
@@ -193,3 +193,20 @@ def nuevo_libro(request):
             autor = autorLibro
         )
     return redirect('listado_libros')
+
+# Kev
+def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
+    """Funcion que actualiza un registro de un prestamo de libro en el sistema.
+    
+    Args:
+        prestamoLibro_id (int): id de un prestamo.
+    """
+    prestamo = get_object_or_404(PrestamoLibro, id=prestamoLibro_id)
+    if request.method == "POST":
+        form = ActualizarPrestamoLibro(request.POST, instance = prestamo)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/prestamos/listado')
+    else:
+        form = ActualizarPrestamoLibro(instance = prestamo)
+    return render(request, 'actualizar_prestamo_libro.html', {"formularioActualizarPrestamo": form})
