@@ -15,11 +15,11 @@
         <h1 class="mb-4 text-center">Crear Nuevo Prestamo</h1>
         <form method="post">
             {% csrf_token %}
-            {{ formulario_prestamo.as_p }}
+            {{ form.as_p }}
             <button type="submit" class="btn btn-outline-success mt-4">Guardar</button>
         </form>
 
-        <a href=" {% url 'listado_socios' %} "> 
+        <a href="#"> 
             <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
         </a>
     </div>

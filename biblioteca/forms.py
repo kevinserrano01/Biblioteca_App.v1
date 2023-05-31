@@ -1,6 +1,6 @@
 from django import forms
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
-
+from datetime import timedelta
 class CrearNuevoEmpleado(forms.Form): # Kev
     nombre = forms.CharField(label='Nombre del empleado', max_length=200)
     apellido = forms.CharField(label='Apellido del empleado', max_length=200)
@@ -37,7 +37,7 @@ class CrearNuevoPrestamo(forms.Form):
     fecha_prestamos = forms.DateField(
         label='Fecha Prestamo (YYYY-MM-DD)'
     )
-    fecha_devolucion=forms.DateField(label='Fecha Devolucion (YYYY-MM-DD)')
+    #fecha_devolucion=forms.DateField(label='Fecha Devolucion (YYYY-MM-DD)')
     socio = forms.ModelChoiceField(label='Socio', queryset=Socio.objects.filter(activo=True))
     empleado = forms.ModelChoiceField(label='Empleado', queryset=Empleado.objects.filter(activo=True))
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
