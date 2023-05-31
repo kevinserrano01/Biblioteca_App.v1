@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoLibro
 from django.http import HttpResponseRedirect
 
 #Nai
@@ -173,3 +173,23 @@ def reg_nuevSocios(request):
             activo = activo
         )
     return redirect('listado_socios')
+
+# Kev
+def nuevo_libro(request):
+    if request.method == 'GET':
+        return render(request, 'nuevo_libro.html', {
+            'formulario_libro': CrearNuevoLibro()
+        })
+    else:
+        tituloLibro=request.POST['titulo']
+        descripcionLibro=request.POST['descripcion']
+        isbnLibro=request.POST['isbn']
+        autorLibro=request.POST['autor']
+
+        Libro.objects.create(
+            titulo = tituloLibro,
+            descripcion = descripcionLibro,
+            isbn = isbnLibro,
+            autor = autorLibro
+        )
+    return redirect('listado_libros')
