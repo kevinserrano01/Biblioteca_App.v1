@@ -17,5 +17,7 @@ urlpatterns = [
     path('socios/desactivar/<int:socio_id>/', views.desactivar_registro_socio, name='desactivar_registro_socio'),
     path('autores/nuevo/', views.reg_nuevAutores, name='nuevos_Autores'),
     path('socios/nuevo/', views.reg_nuevSocios, name='nuevos_Socios'),
-    path('socios/actualizar/<int:socio_id>', views.actualizar_socios, name='actualizar_socio')
+    path('socios/actualizar/<int:socio_id>', views.actualizar_socios, name='actualizar_socio'),
+    path('libros/nuevo/', views.nuevo_libro, name='nuevo_Libro'),
+    path('prestamos/modificar/<int:prestamoLibro_id>', views.actualizar_Prestamo_Libro, name='actualizar_prestamo_libro')
 ]
