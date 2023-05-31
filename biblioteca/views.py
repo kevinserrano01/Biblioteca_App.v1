@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoLibro, ActualizarPrestamoLibro
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio
 from django.http import HttpResponseRedirect
 
 #Nai
