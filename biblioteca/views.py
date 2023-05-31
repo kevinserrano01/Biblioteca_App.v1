@@ -179,7 +179,7 @@ def activar_registro_libro(request, libro_id):
     libro = Libro.objects.get(id=libro_id)
     libro.activo = False
     libro.save()
-    return redirect("listado_libro")
+    return redirect("listado_libro") #chequear nombre   
 
 
 def listado_libros(request):

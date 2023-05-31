@@ -19,4 +19,5 @@ urlpatterns = [
     path('socios/nuevo/', views.reg_nuevSocios, name='nuevos_Socios'),
     path('socios/actualizar/<int:socio_id>', views.actualizar_socios, name='actualizar_socio'),
     path('libros/activar/<int:libro_id>', views.activar_registro_libro, name='activar_registro_libro'),
+    path('libros/listado/', views.listado_libros, name="listado_libros"),
 ]
