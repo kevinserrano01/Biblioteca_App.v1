@@ -173,3 +173,10 @@ def reg_nuevSocios(request):
             activo = activo
         )
     return redirect('listado_socios')
+
+
+def activar_registro_libro(request, libro_id):
+    libro = Libro.objects.get(id=libro_id)
+    libro.activo = False
+    libro.save()
+    return redirect("listado_libro")
