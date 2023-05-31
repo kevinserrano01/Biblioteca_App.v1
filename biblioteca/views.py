@@ -181,3 +181,9 @@ def activar_registro_libro(request, libro_id):
     libro.save()
     return redirect("listado_libro") #chequear nombre   
 
+def listado_prestamolibro(request):
+    prestamos = PrestamoLibro.objects.all()
+    context = {
+        "prestamos": prestamos,
+    }
+    return render(request, "prestamos_lista.html", context)
