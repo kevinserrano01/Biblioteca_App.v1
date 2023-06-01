@@ -241,29 +241,26 @@ def desactivar_libro(request, libro_id:int):
 
 #Nai
 def nuevo_prestamo_libro(request):
-    if request.method == 'POST':
-        form = CrearNuevoPrestamo(request.POST)
-        if form.is_valid():
-            fecha_prestamo = form.cleaned_data['fecha_prestamos']
-            fecha_devolucion =fecha_prestamo + timedelta(days=2)
-            socio = form.cleaned_data['socio']
-            empleado = form.cleaned_data['empleado']
-            libro = form.cleaned_data['libro']
-
-            nuevo_prestamo = PrestamoLibro(
-                fecha_prestamos=fecha_prestamo,
-                fecha_devolucion=fecha_devolucion,
-                socio=socio,
-                empleado=empleado,
-                libro=libro
-            )
-            nuevo_prestamo.save()
-
-            return redirect('listado_socios')
+    if request.method == 'GET':
+        return render(request, 'nuevo_prestamo_libro.html', {
+            'formulario_prestamo_libro': CrearNuevoPrestamo()
+        })
     else:
-        form = CrearNuevoPrestamo()
+        fecha_prestamo = request.POST['fecha_prestamos']
+        dos_dias = datetime.timedelta(days=2)
+        fecha_devolucion_prestamo = datetime.strptime(fecha_prestamo, '%Y/%m/d') + dos_dias
+        socio_prestamo = request.POST['socio']
+        empleado_prestamo = request.POST['empleado']
+        libro_prestamo = request.POST['libro']
 
-    return render(request, 'prestamo_libro.html')
+        PrestamoLibro.objects.create(
+            fecha_prestamo = fecha_prestamo,
+            fecha_devolucion = fecha_devolucion_prestamo,
+            socio = socio_prestamo,
+            empleado = empleado_prestamo,
+            libro = libro_prestamo
+        )
+    return redirect('listado_prestamos_libros')
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
