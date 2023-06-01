@@ -41,6 +41,18 @@ class CrearNuevoSocio(forms.Form):
     apellido = forms.CharField(label='Apellido del autor', max_length=50)
     fecha_nacimiento = forms.DateField(label='Fecha de nacimiento (YYYY-MM-DD)')
 
+class CrearNuevoLibro(forms.Form):
+  titulo = forms.CharField(label='Nombre del Titulo', max_length=50)
+  descripcion = forms.CharField(label='Descripcion', max_length=500)
+  isbn=forms.IntegerField(label='ISBN')
+  autor = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
+  
+
+class ActualizarPrestamo(forms.ModelForm):
+    class Meta:
+        model=PrestamoLibro
+        fields=('__all__')
+
 
 class CrearNuevoPrestamo(forms.Form):
     fecha_prestamos = forms.DateField(
@@ -57,8 +69,4 @@ class ActualizarLibro(forms.ModelForm): # Nai
     class Meta:
         model = Libro
         fields = ('__all__')
-    fecha_prestamos = forms.DateField(label='Fecha Prestamo (YYYY-MM-DD)')
-    fecha_devolucion = forms.DateField(label='Fecha Devolucion (YYYY-MM-DD)')
-    socio = forms.ModelChoiceField(label='Socio', queryset = Socio.objects.filter(activo=True))
-    empleado = forms.ModelChoiceField(label='Empleado', queryset = Empleado.objects.filter(activo=True))
-    libro = forms.ModelChoiceField(label='Libro', queryset = Libro.objects.filter(activo=True))
+    

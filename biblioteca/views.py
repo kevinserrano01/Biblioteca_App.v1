@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamoLibro
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamo, CrearNuevoLibro
 from django.http import HttpResponseRedirect
 from datetime import datetime, timedelta
 
@@ -194,32 +194,35 @@ def listado_prestamolibro(request):
 
 
 # Kev
-def nuevo_libro(request):
-    """Funcion que crea un nuevo libro y lo guarda en la base de datos.
+# def nuevo_libro(request):
+#     """Funcion que crea un nuevo libro y lo guarda en la base de datos.
 
-    Args:
-        request (_type_): _description_
+#     Args:
+#         request (_type_): _description_
 
-    Returns:
-        redirec: Redirecciona al template listado_libros una vez creado el libro.
-    """
-    if request.method == 'GET':
-        return render(request, 'nuevo_libro.html', {
-            'formulario_libro': CrearNuevoLibro()
-        })
-    else:
-        tituloLibro=request.POST['titulo']
-        descripcionLibro=request.POST['descripcion']
-        isbnLibro=request.POST['isbn']
-        autorLibro=request.POST['autor']
+#     Returns:
+#         redirec: Redirecciona al template listado_libros una vez creado el libro.
+#     """
+    # if request.method == 'GET':
+    #     return render(request, 'nuevo_libro.html', {
+    #         'formulario_libro': CrearNuevoLibro()
+    #     })
+    # else:
+    #     tituloLibro=request.POST['titulo']
+    #     descripcionLibro=request.POST['descripcion']
+    #     isbnLibro=request.POST['isbn']
+    #     autorLibro=request.POST['autor']
 
-        Libro.objects.create(
-            titulo = tituloLibro,
-            descripcion = descripcionLibro,
-            isbn = isbnLibro,
-            autor = autorLibro
-        )
-    return redirect('listado_libros')
+    #     Libro.objects.create(
+    #         titulo = tituloLibro,
+    #         descripcion = descripcionLibro,
+    #         isbn = isbnLibro,
+    #         autor = autorLibro
+    #     )
+    # return redirect('listado_libros')
+
+
+
 
 #Nai
 def actualizar_libro(request, libro_id:int):
@@ -265,6 +268,7 @@ def nuevo_prestamo_libro(request):
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
+
     """Funcion que actualiza un registro de un prestamo de libro en el sistema.
 
     Args:
@@ -272,10 +276,33 @@ def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
     """
     prestamo = get_object_or_404(PrestamoLibro, id=prestamoLibro_id)
     if request.method == "POST":
-        form = ActualizarPrestamoLibro(request.POST, instance = prestamo)
+        form = ActualizarPrestamo(request.POST, instance = prestamo)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/biblioteca/prestamos/listado')
     else:
-        form = ActualizarPrestamoLibro(instance = prestamo)
-    return render(request, 'actualizar_prestamo_libro.html', {"formularioActualizarPrestamo": form})
+        form = ActualizarPrestamo(instance = prestamo)
+    return render(request, 'actualiza_prestamo.html', {"formularioActualizarPrestamo": form})
+
+def nuevo_libro(request):
+    if request.method == 'POST':
+        form = CrearNuevoLibro(request.POST)
+        if form.is_valid():
+            titulo = form.cleaned_data['titulo']
+            descripcion = form.cleaned_data['descripcion']
+            isbn = form.cleaned_data['isbn']
+            autor = form.cleaned_data['autor']
+
+            nuevo_libro = Libro(
+                titulo=titulo,
+                descripcion=descripcion,
+                isbn=isbn,
+                autor=autor
+            )
+            nuevo_libro.save()
+
+            return redirect('nuevo_libro')##########
+    else:
+        form = CrearNuevoLibro()
+
+    return render(request, 'nuevo_libro.html', {"form": form})
