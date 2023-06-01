@@ -22,4 +22,7 @@ urlpatterns = [
     path('prestamos/listado/', views.listado_prestamolibro, name='listado_prestamolibro'),
     path('prestamo/nuevo/', views.reg_nuevoPrestamo, name='reg_nuevoPrestamo'),
     
+    path('libros/nuevo/', views.nuevo_libro, name='nuevo_Libro'),
+    path('prestamos/nuevo/', views.nuevo_prestamo_libro, name='nuevo_prestamo_libro'),
+    path('prestamos/modificar/<int:prestamoLibro_id>', views.actualizar_Prestamo_Libro, name='actualizar_prestamo_libro'),
 ]
