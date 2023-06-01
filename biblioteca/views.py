@@ -243,7 +243,7 @@ def desactivar_libro(request, libro_id:int):
 def nuevo_prestamo_libro(request):
     if request.method == 'GET':
         return render(request, 'nuevo_prestamo_libro.html', {
-            'formulario_prestamo_libro': CrearNuevoPrestamoLibro()
+            'formulario_prestamo_libro': CrearNuevoPrestamo()
         })
     else:
         fecha_prestamo = request.POST['fecha_prestamos']
