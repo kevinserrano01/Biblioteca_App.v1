@@ -4,6 +4,7 @@ from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, ActualizarLibro
 from django.http import HttpResponseRedirect
+import datetime
 
 #Nai
 def home(request):
@@ -220,6 +221,29 @@ def desactivar_libro(request, libro_id:int):
     libro.activo = False
     libro.save()
     return redirect("listado_libros")
+
+#Nai
+def nuevo_prestamo_libro(request):
+    if request.method == 'GET':
+        return render(request, 'nuevo_prestamo_libro.html', {
+            'formulario_prestamo_libro': CrearNuevoPrestamoLibro()
+        })
+    else:
+        fecha_prestamo = request.POST['fecha_prestamos']
+        dos_dias = datetime.timedelta(days=2)
+        fecha_devolucion_prestamo = datetime.strptime(fecha_prestamo, '%Y/%m/d') + dos_dias
+        socio_prestamo = request.POST['socio']
+        empleado_prestamo = request.POST['empleado']
+        libro_prestamo = request.POST['libro']
+
+        PrestamoLibro.objects.create(
+            fecha_prestamo = fecha_prestamo,
+            fecha_devolucion = fecha_devolucion_prestamo,
+            socio = socio_prestamo,
+            empleado = empleado_prestamo,
+            libro = libro_prestamo
+        )
+    return redirect('listado_prestamos_libros')
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
