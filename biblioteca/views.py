@@ -191,8 +191,6 @@ def listado_prestamolibro(request):
     }
     return render(request, "prestamos_lista.html", context) #chequear nombre
 
-
-
 # Kev
 # def nuevo_libro(request):
 #     """Funcion que crea un nuevo libro y lo guarda en la base de datos.
@@ -220,8 +218,6 @@ def listado_prestamolibro(request):
     #         autor = autorLibro
     #     )
     # return redirect('listado_libros')
-
-
 
 
 #Nai
@@ -306,3 +302,9 @@ def nuevo_libro(request):
         form = CrearNuevoLibro()
 
     return render(request, 'nuevo_libro.html', {"form": form})
+
+#Andrea
+def eliminar_regPrestamo(request, prestamoLibro_id):
+    regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
+    regPrestamp.delete()
+    return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
