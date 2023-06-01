@@ -2,9 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, ActualizarLibro
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamoLibro
 from django.http import HttpResponseRedirect
-import datetime
+from datetime import datetime, timedelta
+
 
 #Nai
 def home(request):
@@ -174,6 +175,23 @@ def reg_nuevSocios(request):
             activo = activo
         )
     return redirect('listado_socios')
+
+#Funcion Gus
+def activar_registro_libro(request, libro_id):
+    libro = Libro.objects.get(id=libro_id)
+    libro.activo = True
+    libro.save()
+    return redirect("listado_libro") #chequear nombre   
+
+#Funcion Gus
+def listado_prestamolibro(request):
+    prestamos = PrestamoLibro.objects.all()
+    context = {
+        "prestamos": prestamos,
+    }
+    return render(request, "prestamos_lista.html", context) #chequear nombre
+
+
 
 # Kev
 def nuevo_libro(request):

@@ -7,6 +7,7 @@ urlpatterns = [
     path('', include('biblioteca.urls')),
     path('admin/', admin.site.urls), # user: admin - password: admin123
     path('biblioteca/', include('biblioteca.urls')),
+    path('', include('biblioteca.urls')),
     path('api/', include('api.urls')),
 ]
 
