@@ -5,6 +5,11 @@ from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, ActualizarSocio, CrearNuevoSocio
 from django.http import HttpResponseRedirect
 
+#Nai
+def home(request):
+    
+    return render(request, "home.html")
+
 # Kev
 def desactivar_Registro_Empleado(request, empleado_id):
     empleado = Empleado.objects.get(id=empleado_id)
@@ -126,7 +131,7 @@ def desactivar_registro_socio(request, socio_id):
     socio = Socio.objects.get(id=socio_id)
     socio.activo = False
     socio.save()
-    return render(request, 'mensaje_desactivacion_socio.html')
+    return redirect("listado_socios")
 
 # Andrea
 def reg_nuevAutores(request):

@@ -1,5 +1,5 @@
 from django import forms
-from biblioteca.models import Autor, Empleado, Socio
+from biblioteca.models import Autor, Empleado, Socio, Libro
 
 class CrearNuevoEmpleado(forms.Form): # Kev
     nombre = forms.CharField(label='Nombre del empleado', max_length=200)
@@ -11,10 +11,10 @@ class ActualizarAutor(forms.ModelForm): # Kev
         model = Autor
         fields = ('__all__') # Editar todos sus caracteristicas
 
-class ActualizarSocio(forms.Form): # Kev
+class ActualizarSocio(forms.ModelForm): # Kev
     class Meta:
         model = Socio
-        fields = ('nombre','apellido')
+        fields = ('__all__')
 
 
 class CrearNuevoAutor(forms.Form):
@@ -24,6 +24,17 @@ class CrearNuevoAutor(forms.Form):
 
 
 class CrearNuevoSocio(forms.Form):
-    nombre = forms.CharField(label='Nombre del socio', max_length=50)
-    apellido = forms.CharField(label='Apellido del socio', max_length=50)
-    fecha_nacimiento = forms.DateField(label='Fecha de nacimiento')
+    nombre = forms.CharField(label='Nombre del autor', max_length=50)
+    apellido = forms.CharField(label='Apellido del autor', max_length=50)
+    fecha_nacimiento = forms.DateField(label='Fecha de nacimiento (YYYY-MM-DD)')
+
+class CrearNuevoLibro(forms.Form):
+  titulo = forms.CharField(label='Nombre del Titulo', max_length=50)
+  descripcion = forms.CharField(label='Descripcion', max_length=500)
+  isbn=forms.IntegerField(label='ISBN')
+  #autor=
+
+class ActualizarPrestamo(forms.ModelsForm):
+    class Meta:
+        model=Libro
+        fields=('__all__')

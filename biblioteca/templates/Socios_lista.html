@@ -21,6 +21,7 @@
                         <th scope="col"> ID </th>
                         <th scope="col"> Nombre </th>
                         <th scope="col"> Apellido </th>
+                        <th scope="col"> Fecha Nacimiento </th>
                         <th scope="col"> Estado </th>
                         <th scope="col">  </th>
                         <th scope="col">  </th>
@@ -29,12 +30,13 @@
             
                     </tr>
             
-                    <!-- MOSTRAR DATOS DE LA BASE DE DATOS EN EL HTML --------------------------------------------->
+                    <!-- MOSTRAR DATOS DE LA BASE DE DATOS EN EL HTML -->
                     {% for socio in socios %}
                             <tr>
                                 <td> {{socio.id}} </td>
                                 <td> {{socio.nombre}} </td>
                                 <td> {{socio.apellido}} </td>
+                                <td> {{socio.fecha_nacimiento}} </td>
                                 <td>
                                     {% if socio.activo %}
                                         <p>Activo</p>

@@ -4,7 +4,7 @@ from django.db import models
 class Socio(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    fecha_nacimiento = models.DateField
+    fecha_nacimiento = models.DateField(null=True)
     activo = models.BooleanField(default= True)
 
     def __str__(self):
