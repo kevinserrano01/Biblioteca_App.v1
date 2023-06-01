@@ -214,6 +214,13 @@ def actualizar_libro(request, libro_id:int):
         form = ActualizarAutor(instance = libro)
     return render(request, 'actualizar_libro.html', {"form": form})
 
+#Nai
+def desactivar_libro(request, libro_id:int):
+    libro = Libro.objects.get(id=libro_id)
+    libro.activo = False
+    libro.save()
+    return redirect("listado_libros")
+
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
     """Funcion que actualiza un registro de un prestamo de libro en el sistema.
