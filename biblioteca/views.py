@@ -179,16 +179,17 @@ def reg_nuevSocios(request):
 #Funcion Gus
 def activar_registro_libro(request, libro_id):
     libro = Libro.objects.get(id=libro_id)
-    libro.activo = False
+    libro.activo = True
     libro.save()
     return redirect("listado_libro") #chequear nombre   
+
 #Funcion Gus
 def listado_prestamolibro(request):
     prestamos = PrestamoLibro.objects.all()
     context = {
         "prestamos": prestamos,
     }
-    return render(request, "prestamos_lista.html", context)#chequear nombre
+    return render(request, "prestamos_lista.html", context) #chequear nombre
 
 
 
