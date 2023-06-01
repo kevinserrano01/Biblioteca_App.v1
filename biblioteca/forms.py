@@ -1,5 +1,5 @@
 from django import forms
-from biblioteca.models import Autor, Empleado, Socio, Libro
+from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 
 class CrearNuevoEmpleado(forms.Form): # Kev
     nombre = forms.CharField(label='Nombre del empleado', max_length=200)
@@ -32,9 +32,11 @@ class CrearNuevoLibro(forms.Form):
   titulo = forms.CharField(label='Nombre del Titulo', max_length=50)
   descripcion = forms.CharField(label='Descripcion', max_length=500)
   isbn=forms.IntegerField(label='ISBN')
-  #autor=
+  autor = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
+  
 
-class ActualizarPrestamo(forms.ModelsForm):
+class ActualizarPrestamo(forms.ModelForm):
     class Meta:
-        model=Libro
+        model=PrestamoLibro
         fields=('__all__')
+
