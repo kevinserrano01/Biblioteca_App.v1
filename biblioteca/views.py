@@ -215,3 +215,8 @@ def nuevo_libro(request):
         form = CrearNuevoLibro()
 
     return render(request, 'nuevo_libro.html', {"form": form})
+
+def eliminar_regPrestamo(request, prestamoLibro_id):
+    regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
+    regPrestamp.delete()
+    return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
