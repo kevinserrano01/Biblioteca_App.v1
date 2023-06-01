@@ -9,9 +9,7 @@ from django.forms.models import model_to_dict
  
 
 
-def listado_libros(request):
-    libros = list(Libro.objects.values())
-    return JsonResponse(libros, safe=False)
+
 
 def detalle_libro(request, libro_id):
     libro = get_object_or_404(Libro,id=libro_id)
