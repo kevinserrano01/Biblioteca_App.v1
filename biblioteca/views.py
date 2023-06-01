@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, ActualizarLibro
 from django.http import HttpResponseRedirect
 
 #Nai
@@ -201,6 +201,18 @@ def nuevo_libro(request):
             autor = autorLibro
         )
     return redirect('listado_libros')
+
+#Nai
+def actualizar_libro(request, libro_id:int):
+    libro = get_object_or_404(Libro, id=libro_id)
+    if request.method == "POST":
+        form = ActualizarLibro(request.POST, instance = libro)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/libros/listado')
+    else:
+        form = ActualizarAutor(instance = libro)
+    return render(request, 'actualizar_libro.html', {"form": form})
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):

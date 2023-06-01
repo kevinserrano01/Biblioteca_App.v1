@@ -16,7 +16,7 @@
         <form method="post">
             {% csrf_token %}
             {{ formularioActualizarSocio.as_p }}
-            <button type="submit" class="btn btn-outline-success mt-4"">Guardar</button>
+            <button type="submit" class="btn btn-outline-success mt-4">Guardar</button>
         </form>
 
         <a href=" {% url 'listado_socios' %} ">
