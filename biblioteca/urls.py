@@ -21,4 +21,10 @@ urlpatterns = [
     path('libro/nuevo/', views.nuevo_libro, name='nuevo_libro'),
     path('prestamos/modificar/<int:prestamoLibro_id>', views.actualizar_Prestamo_Libro, name='actualizar_prestamo_libro'),
     path('prestamos/eliminar/<int:prestamoLibro_id>', views.eliminar_regPrestamo, name='eliminar_reg_prestamo_libro'),
+    path('socios/actualizar/<int:socio_id>', views.actualizar_socios, name='actualizar_socio'),
+    path('libros/activar/<int:libro_id>', views.activar_registro_libro, name='activar_registro_libro'),
+    path('prestamos/listado/', views.listado_prestamolibro, name='listado_prestamolibro'),
+   
+    path('prestamos/nuevo/', views.nuevo_prestamo_libro, name='nuevo_prestamo_libro'),
+    path('prestamos/modificar/<int:prestamoLibro_id>', views.actualizar_Prestamo_Libro, name='actualizar_prestamo_libro'),
 ]

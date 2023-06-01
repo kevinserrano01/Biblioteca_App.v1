@@ -2,8 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, ActualizarSocio, CrearNuevoSocio, CrearNuevoLibro, ActualizarPrestamo
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamo, CrearNuevoLibro
 from django.http import HttpResponseRedirect
+from datetime import datetime, timedelta
+
 
 #Nai
 def home(request):
@@ -72,15 +74,15 @@ def desactivar_Registro_Autor(request, autor_id):
 
 # Funcion de Gus (modificar datos socio)
 def actualizar_socios(request, socio_id):
-    socio = get_object_or_404(Socio, id=socio_id)  
+    socio = get_object_or_404(Socio, id=socio_id)
     if request.method == "POST":
         form = ActualizarSocio(request.POST, instance = socio)
         if form.is_valid():
-            socio.save()
-            return HttpResponseRedirect('/biblioteca/socios/listado/')
+            form.save()
+            return HttpResponseRedirect('/biblioteca/socios/listado')
     else:
-        form=ActualizarSocio()
-    return render(request, 'actualizar_socio.html', {"form":form})
+        form = ActualizarSocio(instance = socio)
+    return render(request, 'actualizar_socio.html', {"formularioActualizarSocio": form})
 
 # Kev
 def listado_autores(request):
@@ -158,25 +160,115 @@ def reg_nuevAutores(request):
 def reg_nuevSocios(request):
     if request.method == 'GET':
         return render(request, 'nuevo_socio.html', {
-            'formulario_nuevSocio': CrearNuevoSocio()
+            'formulario_socio': CrearNuevoSocio()
         })
     else:
         nombre=request.POST['nombre']
         apellido=request.POST['apellido']
-        fecha_nacimiento=request.POST['fecha_nacimiento']
+        nacimiento=request.POST['fecha_nacimiento']
         activo = True
 
         Socio.objects.create(
             nombre=nombre,
             apellido=apellido,
-            fecha_nacimiento=fecha_nacimiento,
-            activo=activo
+            fecha_nacimiento=nacimiento,
+            activo = activo
         )
     return redirect('listado_socios')
 
+#Funcion Gus
+def activar_registro_libro(request, libro_id):
+    libro = Libro.objects.get(id=libro_id)
+    libro.activo = True
+    libro.save()
+    return redirect("listado_libro") #chequear nombre   
+
+#Funcion Gus
+def listado_prestamolibro(request):
+    prestamos = PrestamoLibro.objects.all()
+    context = {
+        "prestamos": prestamos,
+    }
+    return render(request, "prestamos_lista.html", context) #chequear nombre
 
 
-def actualizar_Prestamo_Libro(request, prestamoLibro_id):
+
+# Kev
+# def nuevo_libro(request):
+#     """Funcion que crea un nuevo libro y lo guarda en la base de datos.
+
+#     Args:
+#         request (_type_): _description_
+
+#     Returns:
+#         redirec: Redirecciona al template listado_libros una vez creado el libro.
+#     """
+    # if request.method == 'GET':
+    #     return render(request, 'nuevo_libro.html', {
+    #         'formulario_libro': CrearNuevoLibro()
+    #     })
+    # else:
+    #     tituloLibro=request.POST['titulo']
+    #     descripcionLibro=request.POST['descripcion']
+    #     isbnLibro=request.POST['isbn']
+    #     autorLibro=request.POST['autor']
+
+    #     Libro.objects.create(
+    #         titulo = tituloLibro,
+    #         descripcion = descripcionLibro,
+    #         isbn = isbnLibro,
+    #         autor = autorLibro
+    #     )
+    # return redirect('listado_libros')
+
+
+
+
+#Nai
+def actualizar_libro(request, libro_id:int):
+    libro = get_object_or_404(Libro, id=libro_id)
+    if request.method == "POST":
+        form = ActualizarLibro(request.POST, instance = libro)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/libros/listado')
+    else:
+        form = ActualizarAutor(instance = libro)
+    return render(request, 'actualizar_libro.html', {"form": form})
+
+#Nai
+def desactivar_libro(request, libro_id:int):
+    libro = Libro.objects.get(id=libro_id)
+    libro.activo = False
+    libro.save()
+    return redirect("listado_libros")
+
+#Nai
+def nuevo_prestamo_libro(request):
+    if request.method == 'GET':
+        return render(request, 'nuevo_prestamo_libro.html', {
+            'formulario_prestamo_libro': CrearNuevoPrestamoLibro()
+        })
+    else:
+        fecha_prestamo = request.POST['fecha_prestamos']
+        dos_dias = datetime.timedelta(days=2)
+        fecha_devolucion_prestamo = datetime.strptime(fecha_prestamo, '%Y/%m/d') + dos_dias
+        socio_prestamo = request.POST['socio']
+        empleado_prestamo = request.POST['empleado']
+        libro_prestamo = request.POST['libro']
+
+        PrestamoLibro.objects.create(
+            fecha_prestamo = fecha_prestamo,
+            fecha_devolucion = fecha_devolucion_prestamo,
+            socio = socio_prestamo,
+            empleado = empleado_prestamo,
+            libro = libro_prestamo
+        )
+    return redirect('listado_prestamos_libros')
+
+# Kev
+def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
+
     """Funcion que actualiza un registro de un prestamo de libro en el sistema.
 
     Args:
@@ -187,11 +279,10 @@ def actualizar_Prestamo_Libro(request, prestamoLibro_id):
         form = ActualizarPrestamo(request.POST, instance = prestamo)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/biblioteca/socios/listado')#######cambiar a lista prestamos
+            return HttpResponseRedirect('/biblioteca/prestamos/listado')
     else:
         form = ActualizarPrestamo(instance = prestamo)
     return render(request, 'actualiza_prestamo.html', {"formularioActualizarPrestamo": form})
-
 
 def nuevo_libro(request):
     if request.method == 'POST':
@@ -215,8 +306,3 @@ def nuevo_libro(request):
         form = CrearNuevoLibro()
 
     return render(request, 'nuevo_libro.html', {"form": form})
-
-def eliminar_regPrestamo(request, prestamoLibro_id):
-    regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
-    regPrestamp.delete()
-    return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
