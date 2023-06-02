@@ -227,9 +227,9 @@ def actualizar_libro(request, libro_id:int):
         form = ActualizarLibro(request.POST, instance = libro)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/biblioteca/libros/listado')
+            return HttpResponseRedirect('/biblioteca/libro/listado')
     else:
-        form = ActualizarAutor(instance = libro)
+        form = ActualizarLibro(instance = libro)
     return render(request, 'actualizar_libro.html', {"form": form})
 
 #Nai

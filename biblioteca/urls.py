@@ -28,6 +28,7 @@ urlpatterns = [
     path('prestamos/modificar/<int:prestamoLibro_id>', views.actualizar_Prestamo_Libro, name='actualizar_prestamo_libro'),
     path('libro/listado/', views.listado_libro, name='libros_lista'),
     path('libros/desactivar/<int:libro_id>', views.desactivar_libro, name='desactivar_libro'),
+    path('libro/modificar/<int:libro_id>', views.actualizar_libro, name='actualizar_libro'),
 ]
 
 
