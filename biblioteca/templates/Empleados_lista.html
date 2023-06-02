@@ -24,7 +24,7 @@
                         <th scope="col"> Nro Legajo </th>
                         <th scope="col"> Estado </th>
                         <th scope="col">  </th>
-                        <th scope="col">  </th>
+                        <!-- <th scope="col">  </th> -->
                         <th scope="col">  </th>
                     </tr>
                     <!-- MOSTRAR DATOS DE LA BASE DE DATOS EN EL HTML --------------------------------------------->
@@ -50,7 +50,7 @@
                                     </button>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href=" ">
                                     <button type="button" class="btn btn-danger rounded-pill">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
@@ -58,7 +58,7 @@
                                         </svg>
                                     </button>
                                 </a>
-                            </td>
+                            </td> -->
                             <td>
                                 {% if empleado.activo %}
                                     <a href="{% url 'desactivar_Registro_Empleado' empleado.id %}">
