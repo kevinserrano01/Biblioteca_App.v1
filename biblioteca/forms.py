@@ -46,6 +46,14 @@ class ActualizarLibro(forms.ModelForm): # Nai
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['socio'].queryset = self.fields['socio'].queryset.filter(activo=True)
+        self.fields['empleado'].queryset = self.fields['empleado'].queryset.filter(activo=True)
+        self.fields['libro'].queryset = self.fields['libro'].queryset.filter(activo=True)
+
+        
+class CrearNuevoPrestamo(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['autor'].queryset = self.fields['autor'].queryset.filter(activo=True)
 
 #Prestamo
@@ -58,9 +66,18 @@ class CrearNuevoPrestamo(forms.Form):
     socio = forms.ModelChoiceField(label='Socio', queryset=Socio.objects.filter(activo=True))
     empleado = forms.ModelChoiceField(label='Empleado', queryset=Empleado.objects.filter(activo=True))
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
+      
+class ActualizarLibro(forms.ModelForm): #Nai
+    #autores = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
 
 class ActualizarPrestamo(forms.ModelForm): #Andrea
     class Meta:
+        model = Libro
+        fields = ('__all__')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['autor'].queryset = self.fields['autor'].queryset.filter(activo=True)
         model=PrestamoLibro
         fields=('__all__')
 
