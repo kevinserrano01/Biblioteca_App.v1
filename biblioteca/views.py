@@ -263,7 +263,7 @@ def nuevo_prestamo_libro(request):
     else:
         form = CrearNuevoPrestamo()
 
-    return render(request, 'prestamo_libro.html')
+    return render(request, 'prestamo_libro.html',{"form": form})
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
