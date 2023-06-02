@@ -312,16 +312,5 @@ def eliminar_regPrestamo(request, prestamoLibro_id):
     regPrestamp.delete()
     return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
 
-#activar prestamo
-def activar_registro_Prestamolibro(request, prestamo_id):
-    libro = PrestamoLibro.objects.get(id=prestamo_id)
-    libro.activo = True
-    libro.save()
-    return redirect("prestamos_lista")
 
-def desactivar_registro_Prestamolibro(request, prestamo_id):
-    libro = PrestamoLibro.objects.get(id=prestamo_id)
-    libro.activo = False
-    libro.save()
-    return redirect("prestamos_lista")
 
