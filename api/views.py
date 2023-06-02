@@ -14,22 +14,8 @@ def detalle_libro(request, libro_id):
     libro_dict=model_to_dict(libro)
     return JsonResponse(libro_dict, safe=False)
 
-
-
-#Nai
-
-   
-
-
-
-
-####GUS### MUESTRA TODOS LOS LIBROS EN FORMATO JSON
-# def listado_libros(request):
-#     libros = list(Libro.objects.values())
-#     return JsonResponse(libros,safe=False)
-
-
 def listado_libros(request):
-    libros = Libro.objects.annotate(autor_nombre_completo=Concat(F('autor__nombre'), Value(' '), F('autor__apellido')))
+    libros = Libro.objects.annotate(autor_nombre_completo=Concat(F('autor_nombre'), Value(' '), F('autor_apellido')))
     libros = libros.values('id', 'titulo', autor_=F('autor_nombre_completo'))
     return JsonResponse(list(libros), safe=False)
+
