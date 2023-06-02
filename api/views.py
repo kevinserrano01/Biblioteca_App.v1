@@ -15,7 +15,7 @@ def detalle_libro(request, libro_id):
     return JsonResponse(libro_dict, safe=False)
 
 def listado_libros(request):
-    libros = Libro.objects.annotate(autor_nombre_completo=Concat(F('autor_nombre'), Value(' '), F('autor_apellido')))
+    libros = Libro.objects.annotate(autor_nombre_completo=Concat(F('autor__nombre'), Value(' '), F('autor__apellido')))
     libros = libros.values('id', 'titulo', autor_=F('autor_nombre_completo'))
     return JsonResponse(list(libros), safe=False)
 
