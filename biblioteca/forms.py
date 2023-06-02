@@ -53,6 +53,13 @@ class ActualizarPrestamo(forms.ModelForm):
         model=PrestamoLibro
         fields=('__all__')
         
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['socio'].queryset = self.fields['socio'].queryset.filter(activo=True)
+        self.fields['empleado'].queryset = self.fields['empleado'].queryset.filter(activo=True)
+        self.fields['libro'].queryset = self.fields['libro'].queryset.filter(activo=True)
+
+        
 class CrearNuevoPrestamo(forms.Form):
     fecha_prestamos = forms.DateField(
         label='Fecha Prestamo (YYYY-MM-DD)'
