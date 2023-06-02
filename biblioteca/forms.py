@@ -42,16 +42,19 @@ class ActualizarLibro(forms.ModelForm): # Nai
     class Meta:
         model = Libro
         fields = ('__all__')
+###revisar los autores activos e inactivos
 
 #Prestamo
 
 class CrearNuevoPrestamo(forms.Form): 
     fecha_prestamos = forms.DateField(
-        label='Fecha Prestamo (YYYY-MM-DD)')
+        label='Fecha Prestamo (YYYY-MM-DD)'
+    )
     #fecha_devolucion=forms.DateField(label='Fecha Devolucion (YYYY-MM-DD)')
     socio = forms.ModelChoiceField(label='Socio', queryset=Socio.objects.filter(activo=True))
     empleado = forms.ModelChoiceField(label='Empleado', queryset=Empleado.objects.filter(activo=True))
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
+
 class ActualizarPrestamo(forms.ModelForm): #Andrea
     class Meta:
         model=PrestamoLibro

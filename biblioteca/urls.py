@@ -31,9 +31,10 @@ urlpatterns = [
 
     path('libros/activar/<int:libro_id>', views.activar_registro_libro, name='activar_registro_libro'),
     #para desactivar
-    #para listado
+    path('libros/lista/', views.lista_libros, name='lista_libros'),
     path('libro/nuevo/', views.nuevo_libro, name='nuevo_libro'),
-    #para modificar
+    path('libro/actualizar/<int:libro_id>', views.actualizar_libro, name='actualizar_libro' ),
+    ##Eliminar????
 
 #Prestamos
 

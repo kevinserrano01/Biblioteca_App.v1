@@ -154,13 +154,18 @@ def activar_registro_libro(request, libro_id):#Gus
     libro = Libro.objects.get(id=libro_id)
     libro.activo = True
     libro.save()
-    return redirect("listado_libro") #chequear nombre 
+    return redirect("listado_libros") #chequear nombre 
 def desactivar_libro(request, libro_id:int):#Nai
     libro = Libro.objects.get(id=libro_id)
     libro.activo = False
     libro.save()
     return redirect("listado_libros")
-##view lista libro
+def lista_libros(request):#Andrea
+    libros = Libro.objects.all()
+    context={
+        "libros":libros,
+    }
+    return render(request, "libros_lista.html", context)
 def nuevo_libro(request):#Kev
     if request.method == 'POST':
         form = CrearNuevoLibro(request.POST)
@@ -183,15 +188,15 @@ def nuevo_libro(request):#Kev
         form = CrearNuevoLibro()
 
     return render(request, 'nuevo_libro.html', {"form": form})
-def actualizar_libro(request, libro_id:int):#Nai
+def actualizar_libro(request, libro_id):#Nai
     libro = get_object_or_404(Libro, id=libro_id)
     if request.method == "POST":
         form = ActualizarLibro(request.POST, instance = libro)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/biblioteca/libros/listado')
+            return HttpResponseRedirect('/biblioteca/libros/lista')
     else:
-        form = ActualizarAutor(instance = libro)
+        form = ActualizarLibro(instance = libro)
     return render(request, 'actualizar_libro.html', {"form": form})
 
 #Prestamo
@@ -202,26 +207,29 @@ def listado_prestamolibro(request):#Gus
     }
     return render(request, "prestamos_lista.html", context) #chequear nombre
 def nuevo_prestamo_libro(request):#Nai
-    if request.method == 'GET':
-        return render(request, 'nuevo_prestamo_libro.html', {
-            'formulario_prestamo_libro': CrearNuevoPrestamo()
-        })
-    else:
-        fecha_prestamo = request.POST['fecha_prestamos']
-        dos_dias = datetime.timedelta(days=2)
-        fecha_devolucion_prestamo = datetime.strptime(fecha_prestamo, '%Y/%m/d') + dos_dias
-        socio_prestamo = request.POST['socio']
-        empleado_prestamo = request.POST['empleado']
-        libro_prestamo = request.POST['libro']
+    if request.method == 'POST':
+        form = CrearNuevoPrestamo(request.POST)
+        if form.is_valid():
+            fecha_prestamo = form.cleaned_data['fecha_prestamos']
+            fecha_devolucion =fecha_prestamo + timedelta(days=2)
+            socio = form.cleaned_data['socio']
+            empleado = form.cleaned_data['empleado']
+            libro = form.cleaned_data['libro']
 
-        PrestamoLibro.objects.create(
-            fecha_prestamo = fecha_prestamo,
-            fecha_devolucion = fecha_devolucion_prestamo,
-            socio = socio_prestamo,
-            empleado = empleado_prestamo,
-            libro = libro_prestamo
-        )
-    return redirect('listado_prestamos_libros')
+            nuevo_prestamo = PrestamoLibro(
+                fecha_prestamos=fecha_prestamo,
+                fecha_devolucion=fecha_devolucion,
+                socio=socio,
+                empleado=empleado,
+                libro=libro
+            )
+            nuevo_prestamo.save()
+
+            return redirect('listado_prestamolibro')
+    else:
+        form = CrearNuevoPrestamo()
+
+    return render(request, 'nuevo_prestamo_libro.html',{"form": form})
 def eliminar_regPrestamo(request, prestamoLibro_id):#Andrea
     regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
     regPrestamp.delete()

@@ -3,14 +3,14 @@
 
 {% block content %}
 <div class="container text-center">
-    <h1 class="mb-4 text-center">Actualizar Autor</h1>
+    <h1 class="mb-4 text-center">Actualizar Libro</h1>
     <form method="post">
         {% csrf_token %}
-        {{ formularioActualizarLibro.as_p }}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-outline-success mt-4">Guardar</button>
     </form>
 
-    <a href=" # ">
+    <a href="{% url 'lista_libros' %}">
         <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
     </a>
 </div>
