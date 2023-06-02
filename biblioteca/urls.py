@@ -26,7 +26,7 @@ urlpatterns = [
     path('prestamos/listado/', views.listado_prestamolibro, name='listado_prestamolibro'),
     path('prestamos/nuevo/', views.nuevo_prestamo_libro, name='nuevo_prestamo_libros'),
     path('prestamos/modificar/<int:prestamoLibro_id>', views.actualizar_Prestamo_Libro, name='actualizar_prestamo_libro'),
-    
+     path('libro/listado/', views.listado_libro, name='listado_libro'),
 ]
 
 
