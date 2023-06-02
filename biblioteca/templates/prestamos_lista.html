@@ -63,22 +63,7 @@
                                         </button>
                                     </a>
                                 </td>
-                                <td>
-                                    <!-- Boton para desactivar --> 
-                                    {% if prestamo.activo %}
-                                        <a href="{% url 'desactivar_registro_Prestamolibro' prestamo.id %}">
-                                            <button type="button" class="btn btn-secondary rounded-pill">
-                                                Desactivar
-                                            </button>
-                                        </a>
-                                    {% else %}
-                                    <!-- Boton para activar --> 
-                                        <a href="{% url 'activar_registro_Prestamolibro' prestamo.id %}">
-                                            <button type="button" class="btn btn-success rounded-pill">
-                                                Activar
-                                            </button>
-                                        </a>
-                                    {% endif %}
+                                
                                 </td>
                             </tr>
                     {% endfor %}
