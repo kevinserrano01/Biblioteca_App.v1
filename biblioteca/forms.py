@@ -61,11 +61,9 @@ class CrearNuevoPrestamo(forms.Form):
     socio = forms.ModelChoiceField(label='Socio', queryset=Socio.objects.filter(activo=True))
     empleado = forms.ModelChoiceField(label='Empleado', queryset=Empleado.objects.filter(activo=True))
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
-    
-
-    
-class ActualizarLibro(forms.ModelForm): # Nai
+      
+class ActualizarLibro(forms.ModelForm): #Nai
+    autores = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
     class Meta:
         model = Libro
-        fields = ('__all__')
-    
+        fields = ('titulo', 'descripcion', 'isbn', 'activo')
