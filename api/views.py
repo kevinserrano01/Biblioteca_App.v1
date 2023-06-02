@@ -19,5 +19,13 @@ def detalle_libro(request, libro_id):
 def listado_libros(request):
     libros = list(map(lambda libro: libro.pop('descripcion'), Libro.objects.values())) #lista de libros sin su descripcion
     return JsonResponse(libros, safe=False)
-    libro_dict = model_to_dict(libro)
-    return JsonResponse(libro_dict, safe=False)
+   
+
+
+
+
+####GUS### MUESTRA TODOS LOS LIBROS EN FORMATO JSON
+# def listado_libros(request):
+#     libros = list(Libro.objects.values())
+#     return JsonResponse(libros,safe=False)
+
