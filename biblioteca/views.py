@@ -310,7 +310,7 @@ def nuevo_libro(request):
 def eliminar_regPrestamo(request, prestamoLibro_id):
     regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
     regPrestamp.delete()
-    return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
+    return redirect('listado_prestamolibro')
 
 
 def listado_libro(request):
