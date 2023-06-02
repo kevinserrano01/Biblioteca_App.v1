@@ -283,7 +283,16 @@ def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
         form = ActualizarPrestamo(instance = prestamo)
     return render(request, 'actualiza_prestamo.html', {"formularioActualizarPrestamo": form})
 
+# Kev
 def nuevo_libro(request):
+    """Funcion que crea un nuevo libro y lo guarda en la base de datos.
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        redirec: Redirecciona al template listado_libros una vez creado el libro.
+    """
     if request.method == 'POST':
         form = CrearNuevoLibro(request.POST)
         if form.is_valid():
