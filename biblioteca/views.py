@@ -259,7 +259,7 @@ def nuevo_prestamo_libro(request):
             )
             nuevo_prestamo.save()
 
-            return redirect('listado_socios')
+            return redirect('listado_prestamolibro')
     else:
         form = CrearNuevoPrestamo()
 
@@ -311,3 +311,4 @@ def eliminar_regPrestamo(request, prestamoLibro_id):
     regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
     regPrestamp.delete()
     return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
+
