@@ -181,7 +181,7 @@ def activar_registro_libro(request, libro_id):
     libro = Libro.objects.get(id=libro_id)
     libro.activo = True
     libro.save()
-    return redirect("listado_libro") #chequear nombre   
+    return redirect("libros_lista") #chequear nombre   
 
 #Funcion Gus
 def listado_prestamolibro(request):
@@ -237,7 +237,7 @@ def desactivar_libro(request, libro_id:int):
     libro = Libro.objects.get(id=libro_id)
     libro.activo = False
     libro.save()
-    return redirect("listado_libros")
+    return redirect("libros_lista")
 
 #Nai
 def nuevo_prestamo_libro(request):
@@ -300,7 +300,7 @@ def nuevo_libro(request):
             )
             nuevo_libro.save()
 
-            return redirect('nuevo_libro')##########
+            return redirect('libros_lista')
     else:
         form = CrearNuevoLibro()
 
@@ -311,6 +311,14 @@ def eliminar_regPrestamo(request, prestamoLibro_id):
     regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
     regPrestamp.delete()
     return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
+
+
+def listado_libro(request):
+    libros = Libro.objects.all()
+    context = {
+        "libros": libros,
+    }
+    return render(request, "libros_lista.html", context) 
 
 
 

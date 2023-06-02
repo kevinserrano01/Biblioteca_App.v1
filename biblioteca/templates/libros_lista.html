@@ -26,6 +26,7 @@
                         <th scope="col"> Estado </th>
                         <th scope="col">  </th>
                         <th scope="col">  </th>
+                        <th scope="col">  </th>
                     </tr>
                     <!-- MOSTRAR DATOS DE LA BASE DE DATOS EN EL HTML --------------------------------------------->
                     {% for libro in libros %}
@@ -62,13 +63,13 @@
                             </td>
                             <td>
                                 {% if libro.activo %}
-                                    <a href="#">
+                                    <a href="{% url 'desactivar_libro' libro.id %}">
                                         <button type="button" class="btn btn-secondary rounded-pill">
                                             Desactivar
                                         </button>
                                     </a>
                                 {% else %}
-                                    <a href="#">
+                                    <a href="{% url 'activar_libro' libro.id %}">
                                         <button type="button" class="btn btn-success rounded-pill">
                                             Activar
                                         </button>
@@ -88,7 +89,7 @@
             </div>
         </div>
 
-        <a class="d-grid gap-2 btn btn-success " href=" {% url 'nuevo_Libro' %} ">
+        <a class="d-grid gap-2 btn btn-success " href="{% url 'nuevo_libro' %}">
             Nuevo libro
         </a>
 
