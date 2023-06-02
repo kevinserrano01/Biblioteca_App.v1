@@ -16,8 +16,12 @@
                 <h1 class="display-5 fw-bold lh-1 mb-3 color-blue">ReadMe</h1>
                 <p class="lead">La aplicación ReadMe es la herramienta para la gestión eficiente y organizada de tu biblioteca. Diseñada pensando en bibliotecarios y administradores, ReadMe simplifica y automatiza todos los aspectos del proceso de gestión de una biblioteca.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button type="button" class="btn btn-book btn-lg px-4 me-md-2">Libros</button>
-                <button type="button" class="btn btn-partner btn-lg px-4">Socios</button>
+                    <a href="{% url 'listado_prestamolibro' %}"> 
+                        <button class="btn btn-book btn-lg px-4 me-md-2">Libros</button>
+                    </a>
+                    <a href="{% url 'listado_socios' %}">
+                        <button href="{% url 'listado_socios' %}" type="button" class="btn btn-partner btn-lg px-4">Socios</button>
+                    </a>
                 </div>
             </div>
             </div>
