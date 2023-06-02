@@ -313,4 +313,12 @@ def eliminar_regPrestamo(request, prestamoLibro_id):
     return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
 
 
+def listado_libro(request):
+    libros = Libro.objects.all()
+    context = {
+        "libros": libros,
+    }
+    return render(request, "libros_lista.html", context) 
+
+
 
