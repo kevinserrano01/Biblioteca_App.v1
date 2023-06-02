@@ -29,3 +29,5 @@ def listado_libros(request):
 #     libros = list(Libro.objects.values())
 #     return JsonResponse(libros,safe=False)
 
+
+
