@@ -29,11 +29,11 @@ urlpatterns = [
 
 #Libros
 
-    path('libros/activar/<int:libro_id>', views.activar_registro_libro, name='activar_registro_libro'),
-    #para desactivar
+    path('libros/activar/<int:libro_id>', views.activar_registro_libro, name='activar_libro'),
+    path('libros/desactivar/<int:libro_id>', views.desactivar_libro, name='desactivar_libro'),#######
     path('libros/lista/', views.lista_libros, name='lista_libros'),
     path('libro/nuevo/', views.nuevo_libro, name='nuevo_libro'),
-    path('libro/actualizar/<int:libro_id>', views.actualizar_libro, name='actualizar_libro' ),
+    path('libro/modificar/<int:libro_id>', views.actualizar_libro, name='actualizar_libro' ),
     ##Eliminar????
 
 #Prestamos

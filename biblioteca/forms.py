@@ -39,10 +39,14 @@ class CrearNuevoLibro(forms.Form): #Andrea
   isbn=forms.IntegerField(label='ISBN')
   autor = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
 class ActualizarLibro(forms.ModelForm): # Nai
+    #autores = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
     class Meta:
         model = Libro
         fields = ('__all__')
-###revisar los autores activos e inactivos
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['autor'].queryset = self.fields['autor'].queryset.filter(activo=True)
 
 #Prestamo
 
@@ -59,6 +63,12 @@ class ActualizarPrestamo(forms.ModelForm): #Andrea
     class Meta:
         model=PrestamoLibro
         fields=('__all__')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['socio'].queryset = self.fields['socio'].queryset.filter(activo=True)
+        self.fields['empleado'].queryset = self.fields['empleado'].queryset.filter(activo=True)
+        self.fields['libro'].queryset = self.fields['libro'].queryset.filter(activo=True)
 
 
 

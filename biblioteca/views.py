@@ -62,7 +62,7 @@ def activar_Registro_Socio(request, socio_id):#Kev
     socio.activo = True
     socio.save()
     return redirect("listado_socios")
-def desactivar_registro_socio(request, socio_id):#Luis
+def desactivar_registro_socio(request, socio_id):#Luis 000
     socio = Socio.objects.get(id=socio_id)
     socio.activo = False
     socio.save()
@@ -73,7 +73,7 @@ def listado_socios(request):#Nai
         "socios": socios,
     }
     return render(request, "Socios_lista.html", context)
-def reg_nuevSocios(request):#Andrea
+def reg_nuevSocios(request):#Andrea 000
     if request.method == 'GET':
         return render(request, 'nuevo_socio.html', {
             'formulario_socio': CrearNuevoSocio()
@@ -103,7 +103,7 @@ def actualizar_socios(request, socio_id):#Gus
     return render(request, 'actualizar_socio.html', {"formularioActualizarSocio": form})
 
 #Autor
-def activar_registro_autor(request, autor_id):#Luis
+def activar_registro_autor(request, autor_id):#Luis 000
     autor = Autor.objects.get(id=autor_id)
     autor.activo = True
     autor.save()
@@ -119,7 +119,7 @@ def listado_autores(request):#Kev
         "autores":autores,
     }
     return render(request, "autores_lista.html", context)
-def reg_nuevAutores(request):#Andrea
+def reg_nuevAutores(request):#Andrea 000
     if request.method == 'GET':
         return render(request, 'nuevo_autor.html', {
             'formularioautor': CrearNuevoAutor()
@@ -138,7 +138,7 @@ def reg_nuevAutores(request):#Andrea
             activo = activo
         )
     return redirect('listado_autores')
-def actualizar_autor(request, autor_id):#Nai
+def actualizar_autor(request, autor_id):#Nai 000
     autor = get_object_or_404(Autor, id=autor_id)
     if request.method == "POST":
         form = ActualizarAutor(request.POST, instance = autor)
@@ -150,23 +150,23 @@ def actualizar_autor(request, autor_id):#Nai
     return render(request, 'actualizar_autor.html', {"form": form})
 
 #Libro
-def activar_registro_libro(request, libro_id):#Gus
+def activar_registro_libro(request, libro_id):#Gus 000
     libro = Libro.objects.get(id=libro_id)
     libro.activo = True
     libro.save()
-    return redirect("listado_libros") #chequear nombre 
-def desactivar_libro(request, libro_id:int):#Nai
+    return redirect("lista_libros") #chequear nombre 
+def desactivar_libro(request, libro_id:int):#Nai 000
     libro = Libro.objects.get(id=libro_id)
     libro.activo = False
     libro.save()
-    return redirect("listado_libros")
-def lista_libros(request):#Andrea
+    return redirect("lista_libros")
+def lista_libros(request):#Andrea 000
     libros = Libro.objects.all()
     context={
         "libros":libros,
     }
     return render(request, "libros_lista.html", context)
-def nuevo_libro(request):#Kev
+def nuevo_libro(request):#Kev 000
     if request.method == 'POST':
         form = CrearNuevoLibro(request.POST)
         if form.is_valid():
@@ -183,12 +183,12 @@ def nuevo_libro(request):#Kev
             )
             nuevo_libro.save()
 
-            return redirect('nuevo_libro')##########
+            return redirect('lista_libros')
     else:
         form = CrearNuevoLibro()
 
     return render(request, 'nuevo_libro.html', {"form": form})
-def actualizar_libro(request, libro_id):#Nai
+def actualizar_libro(request, libro_id):#Nai 000
     libro = get_object_or_404(Libro, id=libro_id)
     if request.method == "POST":
         form = ActualizarLibro(request.POST, instance = libro)
@@ -200,13 +200,13 @@ def actualizar_libro(request, libro_id):#Nai
     return render(request, 'actualizar_libro.html', {"form": form})
 
 #Prestamo
-def listado_prestamolibro(request):#Gus
+def listado_prestamolibro(request):#Gus 000
     prestamos = PrestamoLibro.objects.all()
     context = {
         "prestamos": prestamos,
     }
     return render(request, "prestamos_lista.html", context) #chequear nombre
-def nuevo_prestamo_libro(request):#Nai
+def nuevo_prestamo_libro(request):#Nai 000
     if request.method == 'POST':
         form = CrearNuevoPrestamo(request.POST)
         if form.is_valid():
@@ -229,12 +229,12 @@ def nuevo_prestamo_libro(request):#Nai
     else:
         form = CrearNuevoPrestamo()
 
-    return render(request, 'nuevo_prestamo_libro.html',{"form": form})
-def eliminar_regPrestamo(request, prestamoLibro_id):#Andrea
+    return render(request, 'nuevo_prestamo_libro.html',{"form": form})# diferente de gus pero con 'nuevo'
+def eliminar_regPrestamo(request, prestamoLibro_id):#Andrea 000
     regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
     regPrestamp.delete()
     return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
-def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):#Kev
+def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):#Kev 000
 
     """Funcion que actualiza un registro de un prestamo de libro en el sistema.
 
