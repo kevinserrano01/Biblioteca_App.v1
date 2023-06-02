@@ -55,7 +55,7 @@ def actualizar_empleado(request, empleado_id):#Luis
         }
     return render(request, "formulario_actualizar_empleado.html", context)
 
-#Soci0
+#Socio
 def activar_Registro_Socio(request, socio_id):#Kev
     """Funcion que activa un registro de socio"""
     socio = Socio.objects.get(id=socio_id)
