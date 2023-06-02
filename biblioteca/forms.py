@@ -70,7 +70,7 @@ class CrearNuevoPrestamo(forms.Form):
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
       
 class ActualizarLibro(forms.ModelForm): #Nai
-    autores = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
+    #autores = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
     class Meta:
         model = Libro
         fields = ('__all__')
