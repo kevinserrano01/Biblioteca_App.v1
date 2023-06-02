@@ -259,11 +259,11 @@ def nuevo_prestamo_libro(request):
             )
             nuevo_prestamo.save()
 
-            return redirect('listado_socios')
+            return redirect('listado_prestamolibro')
     else:
         form = CrearNuevoPrestamo()
 
-    return render(request, 'prestamo_libro.html')
+    return render(request, 'prestamo_libro.html',{"form": form})
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
@@ -311,3 +311,6 @@ def eliminar_regPrestamo(request, prestamoLibro_id):
     regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
     regPrestamp.delete()
     return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
+
+
+

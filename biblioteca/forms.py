@@ -52,8 +52,7 @@ class ActualizarPrestamo(forms.ModelForm):
     class Meta:
         model=PrestamoLibro
         fields=('__all__')
-
-
+        
 class CrearNuevoPrestamo(forms.Form):
     fecha_prestamos = forms.DateField(
         label='Fecha Prestamo (YYYY-MM-DD)'
@@ -62,7 +61,7 @@ class CrearNuevoPrestamo(forms.Form):
     socio = forms.ModelChoiceField(label='Socio', queryset=Socio.objects.filter(activo=True))
     empleado = forms.ModelChoiceField(label='Empleado', queryset=Empleado.objects.filter(activo=True))
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
-
+    
 
     
 class ActualizarLibro(forms.ModelForm): # Nai
