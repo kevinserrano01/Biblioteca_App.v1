@@ -6,21 +6,42 @@ from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAuto
 from django.http import HttpResponseRedirect
 from datetime import datetime, timedelta
 
-
 #Nai
 def home(request):
-    
     return render(request, "home.html")
 
-# Kev
-def desactivar_Registro_Empleado(request, empleado_id):
+#Empleado
+def activar_Registro_Empleado(request, empleado_id):#Kev
+    """Funcion que activa un registro de empleado"""
+    empleado = Empleado.objects.get(id=empleado_id)
+    empleado.activo = True
+    empleado.save()
+    return redirect("listado_empleados")
+def desactivar_Registro_Empleado(request, empleado_id):#Kev
     empleado = Empleado.objects.get(id=empleado_id)
     empleado.activo = False
     empleado.save()
     return redirect("listado_empleados")
-
-# funcion de Luis
-def actualizar_empleado(request, empleado_id):
+def listado_empleados(request):
+    empleados=Empleado.objects.all()
+    context={
+        "empleados":empleados,
+    }
+    return render(request, "Empleados_lista.html", context)
+def nuevo_empleado(request):#Kev
+    """CREA NUEVO EMPLEADO"""
+    if request.method == 'GET':
+        return render(request, 'nuevo_empleado.html', {
+            'formularioEmpleado': CrearNuevoEmpleado()
+        })
+    else:
+        nombreEmpleado = request.POST['nombre']
+        apellidoEmpleado = request.POST['apellido']
+        legajoEmpleado = request.POST['nro_legajo']
+        activos = True
+        Empleado.objects.create(nombre=nombreEmpleado, apellido=apellidoEmpleado, nro_legajo=legajoEmpleado, activo=activos)
+        return redirect('listado_empleados')  # redirecciona a la url con el name='listado_empleados' en urls.py
+def actualizar_empleado(request, empleado_id):#Luis
     empleado = get_object_or_404(Empleado, pk=empleado_id)   
     if request.method == "POST":
         empleado.nombre = request.POST["nombre"]
@@ -34,46 +55,43 @@ def actualizar_empleado(request, empleado_id):
         }
     return render(request, "formulario_actualizar_empleado.html", context)
 
-
-def listado_empleados(request):
-    empleados=Empleado.objects.all()
-    context={
-        "empleados":empleados,
+#Soci0
+def activar_Registro_Socio(request, socio_id):#Kev
+    """Funcion que activa un registro de socio"""
+    socio = Socio.objects.get(id=socio_id)
+    socio.activo = True
+    socio.save()
+    return redirect("listado_socios")
+def desactivar_registro_socio(request, socio_id):#Luis
+    socio = Socio.objects.get(id=socio_id)
+    socio.activo = False
+    socio.save()
+    return redirect("listado_socios")
+def listado_socios(request):#Nai
+    socios = Socio.objects.all()
+    context = {
+        "socios": socios,
     }
-    return render(request, "Empleados_lista.html", context)
-
-# Kev
-def activar_Registro_Empleado(request, empleado_id):
-    """Funcion que activa un registro de empleado"""
-    empleado = Empleado.objects.get(id=empleado_id)
-    empleado.activo = True
-    empleado.save()
-    return redirect("listado_empleados")
-
-# Kev
-def nuevo_empleado(request):
-    """CREA NUEVO EMPLEADO"""
+    return render(request, "Socios_lista.html", context)
+def reg_nuevSocios(request):#Andrea
     if request.method == 'GET':
-        return render(request, 'nuevo_empleado.html', {
-            'formularioEmpleado': CrearNuevoEmpleado()
+        return render(request, 'nuevo_socio.html', {
+            'formulario_socio': CrearNuevoSocio()
         })
     else:
-        nombreEmpleado = request.POST['nombre']
-        apellidoEmpleado = request.POST['apellido']
-        legajoEmpleado = request.POST['nro_legajo']
-        activos = True
-        Empleado.objects.create(nombre=nombreEmpleado, apellido=apellidoEmpleado, nro_legajo=legajoEmpleado, activo=activos)
-        return redirect('listado_empleados')  # redirecciona a la url con el name='listado_empleados' en urls.py
+        nombre=request.POST['nombre']
+        apellido=request.POST['apellido']
+        nacimiento=request.POST['fecha_nacimiento']
+        activo = True
 
-# Funcion de Gus (desactivar autor)
-def desactivar_Registro_Autor(request, autor_id):
-    autor = Autor.objects.get(id=autor_id)
-    autor.activo = False
-    autor.save()
-    return redirect("listado_autores")
-
-# Funcion de Gus (modificar datos socio)
-def actualizar_socios(request, socio_id):
+        Socio.objects.create(
+            nombre=nombre,
+            apellido=apellido,
+            fecha_nacimiento=nacimiento,
+            activo = activo
+        )
+    return redirect('listado_socios')
+def actualizar_socios(request, socio_id):#Gus
     socio = get_object_or_404(Socio, id=socio_id)
     if request.method == "POST":
         form = ActualizarSocio(request.POST, instance = socio)
@@ -84,59 +102,24 @@ def actualizar_socios(request, socio_id):
         form = ActualizarSocio(instance = socio)
     return render(request, 'actualizar_socio.html', {"formularioActualizarSocio": form})
 
-# Kev
-def listado_autores(request):
+#Autor
+def activar_registro_autor(request, autor_id):#Luis
+    autor = Autor.objects.get(id=autor_id)
+    autor.activo = True
+    autor.save()
+    return redirect("listado_autores")
+def desactivar_Registro_Autor(request, autor_id):#Gus
+    autor = Autor.objects.get(id=autor_id)
+    autor.activo = False
+    autor.save()
+    return redirect("listado_autores")
+def listado_autores(request):#Kev
     autores = Autor.objects.all()
     context={
         "autores":autores,
     }
     return render(request, "autores_lista.html", context)
-
-# Kev
-def activar_Registro_Socio(request, socio_id):
-    """Funcion que activa un registro de socio"""
-    socio = Socio.objects.get(id=socio_id)
-    socio.activo = True
-    socio.save()
-    return redirect("listado_socios")
-
-#Nai
-def listado_socios(request):
-    socios = Socio.objects.all()
-    context = {
-        "socios": socios,
-    }
-    return render(request, "Socios_lista.html", context)
-
-#Nai
-def actualizar_autor(request, autor_id):
-    autor = get_object_or_404(Autor, id=autor_id)
-    if request.method == "POST":
-        form = ActualizarAutor(request.POST, instance = autor)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/biblioteca/autores/listado')
-    else:
-        form = ActualizarAutor(instance = autor)
-    return render(request, 'actualizar_autor.html', {"form": form})
-
-# funcion de Luis
-def activar_registro_autor(request, autor_id):
-    autor = Autor.objects.get(id=autor_id)
-    autor.activo = True
-    autor.save()
-    return redirect("listado_autores")
-
-
-# funcion de Luis Alberto
-def desactivar_registro_socio(request, socio_id):
-    socio = Socio.objects.get(id=socio_id)
-    socio.activo = False
-    socio.save()
-    return redirect("listado_socios")
-
-# Andrea
-def reg_nuevAutores(request):
+def reg_nuevAutores(request):#Andrea
     if request.method == 'GET':
         return render(request, 'nuevo_autor.html', {
             'formularioautor': CrearNuevoAutor()
@@ -155,41 +138,110 @@ def reg_nuevAutores(request):
             activo = activo
         )
     return redirect('listado_autores')
-
-# Andrea
-def reg_nuevSocios(request):
-    if request.method == 'GET':
-        return render(request, 'nuevo_socio.html', {
-            'formulario_socio': CrearNuevoSocio()
-        })
+def actualizar_autor(request, autor_id):#Nai
+    autor = get_object_or_404(Autor, id=autor_id)
+    if request.method == "POST":
+        form = ActualizarAutor(request.POST, instance = autor)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/autores/listado')
     else:
-        nombre=request.POST['nombre']
-        apellido=request.POST['apellido']
-        nacimiento=request.POST['fecha_nacimiento']
-        activo = True
+        form = ActualizarAutor(instance = autor)
+    return render(request, 'actualizar_autor.html', {"form": form})
 
-        Socio.objects.create(
-            nombre=nombre,
-            apellido=apellido,
-            fecha_nacimiento=nacimiento,
-            activo = activo
-        )
-    return redirect('listado_socios')
-
-#Funcion Gus
-def activar_registro_libro(request, libro_id):
+#Libro
+def activar_registro_libro(request, libro_id):#Gus
     libro = Libro.objects.get(id=libro_id)
     libro.activo = True
     libro.save()
-    return redirect("listado_libro") #chequear nombre   
+    return redirect("listado_libro") #chequear nombre 
+def desactivar_libro(request, libro_id:int):#Nai
+    libro = Libro.objects.get(id=libro_id)
+    libro.activo = False
+    libro.save()
+    return redirect("listado_libros")
+##view lista libro
+def nuevo_libro(request):#Kev
+    if request.method == 'POST':
+        form = CrearNuevoLibro(request.POST)
+        if form.is_valid():
+            titulo = form.cleaned_data['titulo']
+            descripcion = form.cleaned_data['descripcion']
+            isbn = form.cleaned_data['isbn']
+            autor = form.cleaned_data['autor']
 
-#Funcion Gus
-def listado_prestamolibro(request):
+            nuevo_libro = Libro(
+                titulo=titulo,
+                descripcion=descripcion,
+                isbn=isbn,
+                autor=autor
+            )
+            nuevo_libro.save()
+
+            return redirect('nuevo_libro')##########
+    else:
+        form = CrearNuevoLibro()
+
+    return render(request, 'nuevo_libro.html', {"form": form})
+def actualizar_libro(request, libro_id:int):#Nai
+    libro = get_object_or_404(Libro, id=libro_id)
+    if request.method == "POST":
+        form = ActualizarLibro(request.POST, instance = libro)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/libros/listado')
+    else:
+        form = ActualizarAutor(instance = libro)
+    return render(request, 'actualizar_libro.html', {"form": form})
+
+#Prestamo
+def listado_prestamolibro(request):#Gus
     prestamos = PrestamoLibro.objects.all()
     context = {
         "prestamos": prestamos,
     }
     return render(request, "prestamos_lista.html", context) #chequear nombre
+def nuevo_prestamo_libro(request):#Nai
+    if request.method == 'GET':
+        return render(request, 'nuevo_prestamo_libro.html', {
+            'formulario_prestamo_libro': CrearNuevoPrestamo()
+        })
+    else:
+        fecha_prestamo = request.POST['fecha_prestamos']
+        dos_dias = datetime.timedelta(days=2)
+        fecha_devolucion_prestamo = datetime.strptime(fecha_prestamo, '%Y/%m/d') + dos_dias
+        socio_prestamo = request.POST['socio']
+        empleado_prestamo = request.POST['empleado']
+        libro_prestamo = request.POST['libro']
+
+        PrestamoLibro.objects.create(
+            fecha_prestamo = fecha_prestamo,
+            fecha_devolucion = fecha_devolucion_prestamo,
+            socio = socio_prestamo,
+            empleado = empleado_prestamo,
+            libro = libro_prestamo
+        )
+    return redirect('listado_prestamos_libros')
+def eliminar_regPrestamo(request, prestamoLibro_id):#Andrea
+    regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
+    regPrestamp.delete()
+    return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
+def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):#Kev
+
+    """Funcion que actualiza un registro de un prestamo de libro en el sistema.
+
+    Args:
+        prestamoLibro_id (int): id de un prestamo.
+    """
+    prestamo = get_object_or_404(PrestamoLibro, id=prestamoLibro_id)
+    if request.method == "POST":
+        form = ActualizarPrestamo(request.POST, instance = prestamo)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/prestamos/listado')###
+    else:
+        form = ActualizarPrestamo(instance = prestamo)
+    return render(request, 'actualiza_prestamo.html', {"formularioActualizarPrestamo": form})
 
 # Kev
 # def nuevo_libro(request):
@@ -218,93 +270,3 @@ def listado_prestamolibro(request):
     #         autor = autorLibro
     #     )
     # return redirect('listado_libros')
-
-
-#Nai
-def actualizar_libro(request, libro_id:int):
-    libro = get_object_or_404(Libro, id=libro_id)
-    if request.method == "POST":
-        form = ActualizarLibro(request.POST, instance = libro)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/biblioteca/libros/listado')
-    else:
-        form = ActualizarAutor(instance = libro)
-    return render(request, 'actualizar_libro.html', {"form": form})
-
-#Nai
-def desactivar_libro(request, libro_id:int):
-    libro = Libro.objects.get(id=libro_id)
-    libro.activo = False
-    libro.save()
-    return redirect("listado_libros")
-
-#Nai
-def nuevo_prestamo_libro(request):
-    if request.method == 'GET':
-        return render(request, 'nuevo_prestamo_libro.html', {
-            'formulario_prestamo_libro': CrearNuevoPrestamoLibro()
-        })
-    else:
-        fecha_prestamo = request.POST['fecha_prestamos']
-        dos_dias = datetime.timedelta(days=2)
-        fecha_devolucion_prestamo = datetime.strptime(fecha_prestamo, '%Y/%m/d') + dos_dias
-        socio_prestamo = request.POST['socio']
-        empleado_prestamo = request.POST['empleado']
-        libro_prestamo = request.POST['libro']
-
-        PrestamoLibro.objects.create(
-            fecha_prestamo = fecha_prestamo,
-            fecha_devolucion = fecha_devolucion_prestamo,
-            socio = socio_prestamo,
-            empleado = empleado_prestamo,
-            libro = libro_prestamo
-        )
-    return redirect('listado_prestamos_libros')
-
-# Kev
-def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
-
-    """Funcion que actualiza un registro de un prestamo de libro en el sistema.
-
-    Args:
-        prestamoLibro_id (int): id de un prestamo.
-    """
-    prestamo = get_object_or_404(PrestamoLibro, id=prestamoLibro_id)
-    if request.method == "POST":
-        form = ActualizarPrestamo(request.POST, instance = prestamo)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/biblioteca/prestamos/listado')
-    else:
-        form = ActualizarPrestamo(instance = prestamo)
-    return render(request, 'actualiza_prestamo.html', {"formularioActualizarPrestamo": form})
-
-def nuevo_libro(request):
-    if request.method == 'POST':
-        form = CrearNuevoLibro(request.POST)
-        if form.is_valid():
-            titulo = form.cleaned_data['titulo']
-            descripcion = form.cleaned_data['descripcion']
-            isbn = form.cleaned_data['isbn']
-            autor = form.cleaned_data['autor']
-
-            nuevo_libro = Libro(
-                titulo=titulo,
-                descripcion=descripcion,
-                isbn=isbn,
-                autor=autor
-            )
-            nuevo_libro.save()
-
-            return redirect('nuevo_libro')##########
-    else:
-        form = CrearNuevoLibro()
-
-    return render(request, 'nuevo_libro.html', {"form": form})
-
-#Andrea
-def eliminar_regPrestamo(request, prestamoLibro_id):
-    regPrestamp= PrestamoLibro.objects.get(id=prestamoLibro_id)
-    regPrestamp.delete()
-    return HttpResponse(f'El prestamo {prestamoLibro_id} fue eliminado')
