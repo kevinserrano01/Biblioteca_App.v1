@@ -6,8 +6,8 @@ from django.forms.models import model_to_dict
 from django.shortcuts import render
 from biblioteca.models import Libro
 from django.http import JsonResponse
-from django.db.models import F
-
+from django.db.models import F, Value
+from django.db.models.functions import Concat
 
 def detalle_libro(request, libro_id):
     libro = get_object_or_404(Libro,id=libro_id)
@@ -17,18 +17,19 @@ def detalle_libro(request, libro_id):
 
 
 #Nai
-# def listado_libros(request):
-#     libros = list(map(lambda libro: libro.pop('descripcion'), Libro.objects.values())) #lista de libros sin su descripcion
-#     return JsonResponse(libros, safe=False)
 
+   
 
 
 
 
 ####GUS### MUESTRA TODOS LOS LIBROS EN FORMATO JSON
+# def listado_libros(request):
+#     libros = list(Libro.objects.values())
+#     return JsonResponse(libros,safe=False)
+
+
 def listado_libros(request):
-    libros = list(Libro.objects.values('id', 'titulo', Autor= F('autor__nombre')))
-    return JsonResponse(libros,safe=False)
-
-
-
+    Autor = Libro.objects.annotate(Autor=Concat(F('autor__nombre'), Value(' '), F('autor__apellido')))
+    libros = libros.values('isbn', 'titulo', Autor=F('autor_nombre_completo'))
+    return JsonResponse(list(libros), safe=False)
