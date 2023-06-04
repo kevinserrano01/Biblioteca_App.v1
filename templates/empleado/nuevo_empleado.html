@@ -1,0 +1,19 @@
+{% extends 'home/navbar.html' %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="mb-4 ">Crear nuevo Empleado</h1>
+    <form method="post" class="form-control text-center">
+        {% csrf_token %}
+        <div class="col-12">
+            {{ formularioEmpleado.as_p }}
+        </div>
+        
+        <button type="submit" class="btn btn-outline-success mt-4">Guardar</button>
+    </form>
+
+    <a href=" {% url 'listado_empleados' %} ">
+        <button type="button" class="btn btn-outline-dark mt-4">Volver al listado</button>
+    </a>
+</div>
+{% endblock %}
