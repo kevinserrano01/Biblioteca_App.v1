@@ -4,7 +4,7 @@ from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamo, CrearNuevoLibro
 from django.http import HttpResponseRedirect
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 #Nai
 def home(request):
@@ -211,7 +211,7 @@ def nuevo_prestamo_libro(request):
     if request.method == 'POST':
         form = CrearNuevoPrestamo(request.POST)
         if form.is_valid():
-            fecha_prestamo = form.cleaned_data['fecha_prestamos']
+            fecha_prestamo = datetime.now() # Registrar la fecha actual al crear un prestamo
             fecha_devolucion =fecha_prestamo + timedelta(days=2)
             socio = form.cleaned_data['socio']
             empleado = form.cleaned_data['empleado']

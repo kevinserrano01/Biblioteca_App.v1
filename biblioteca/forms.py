@@ -61,13 +61,23 @@ class ActualizarPrestamo(forms.ModelForm):
 
         
 class CrearNuevoPrestamo(forms.Form):
-    fecha_prestamos = forms.DateField(
-        label='Fecha Prestamo (YYYY-MM-DD)'
-    )
-    #fecha_devolucion=forms.DateField(label='Fecha Devolucion (YYYY-MM-DD)')
     socio = forms.ModelChoiceField(label='Socio', queryset=Socio.objects.filter(activo=True))
     empleado = forms.ModelChoiceField(label='Empleado', queryset=Empleado.objects.filter(activo=True))
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
+
+# Otra forma de crear un nuevo prestamo es de la siguiente manera:
+# class CrearNuevoPrestamo(forms.ModelForm):
+    """Lo que hace esto es crear un nuevo prestamo pero con la fecha actual del sistema."""
+#     class Meta:
+#         model = Empleado
+#         fields = '__all__'
+        
+#     def __init__(self, *args, **kwargs):
+#         super(CrearNuevoPrestamo, self).__init__(*args, **kwargs)
+#         self.fields['fecha_prestamos'].initial = datetime.now()
+
+
+
 '''
 def clean_libro(self):
         lista_prestamos =   PrestamoLibro.objects.all()
