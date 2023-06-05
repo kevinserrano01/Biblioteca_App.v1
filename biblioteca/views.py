@@ -288,7 +288,6 @@ def eliminar_regPrestamo(request, prestamoLibro_id):
     regPrestamp.delete()
     return redirect('listado_prestamolibro')
 
-
 def listado_libro(request):
     libros = Libro.objects.all()
     context = {
