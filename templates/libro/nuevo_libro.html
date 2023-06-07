@@ -1,0 +1,21 @@
+{% extends 'home/navbar.html' %}
+{% block content %}
+<div class="container text-center">
+
+    <h1 class="mb-4 ">Crear nuevo Libro</h1>
+
+    <form method="post" class="form-control text-center">
+        {% csrf_token %}
+        <div class="col-12">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-outline-success mt-4">Guardar</button>
+    </form>
+
+    
+    <a href="{% url 'libros_lista' %}">
+        <button type="button" class="btn btn-outline-dark mt-4">Volver al listado de Libros</button>
+    </a>
+
+</div>
+{% endblock %}
