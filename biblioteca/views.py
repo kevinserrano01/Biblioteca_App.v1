@@ -4,13 +4,11 @@ from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
 from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamo, CrearNuevoLibro
 from django.http import HttpResponseRedirect
-from datetime import datetime, timedelta
-
+from datetime import timedelta, datetime
 
 #Nai
 def home(request):
-    
-    return render(request, "home.html")
+    return render(request, "home/home.html")
 
 # Kev
 def desactivar_Registro_Empleado(request, empleado_id):
@@ -32,15 +30,14 @@ def actualizar_empleado(request, empleado_id):
     context = {
             'empleado': empleado,
         }
-    return render(request, "formulario_actualizar_empleado.html", context)
-
+    return render(request, "empleado/formulario_actualizar_empleado.html", context)
 
 def listado_empleados(request):
     empleados=Empleado.objects.all()
     context={
         "empleados":empleados,
     }
-    return render(request, "Empleados_lista.html", context)
+    return render(request, "empleado/Empleados_lista.html", context)
 
 # Kev
 def activar_Registro_Empleado(request, empleado_id):
@@ -54,7 +51,7 @@ def activar_Registro_Empleado(request, empleado_id):
 def nuevo_empleado(request):
     """CREA NUEVO EMPLEADO"""
     if request.method == 'GET':
-        return render(request, 'nuevo_empleado.html', {
+        return render(request, 'empleado/nuevo_empleado.html', {
             'formularioEmpleado': CrearNuevoEmpleado()
         })
     else:
@@ -82,7 +79,7 @@ def actualizar_socios(request, socio_id):
             return HttpResponseRedirect('/biblioteca/socios/listado')
     else:
         form = ActualizarSocio(instance = socio)
-    return render(request, 'actualizar_socio.html', {"formularioActualizarSocio": form})
+    return render(request, 'socio/actualizar_socio.html', {"formularioActualizarSocio": form})
 
 # Kev
 def listado_autores(request):
@@ -90,7 +87,7 @@ def listado_autores(request):
     context={
         "autores":autores,
     }
-    return render(request, "autores_lista.html", context)
+    return render(request, "autor/autores_lista.html", context)
 
 # Kev
 def activar_Registro_Socio(request, socio_id):
@@ -106,7 +103,7 @@ def listado_socios(request):
     context = {
         "socios": socios,
     }
-    return render(request, "Socios_lista.html", context)
+    return render(request, "socio/Socios_lista.html", context)
 
 #Nai
 def actualizar_autor(request, autor_id):
@@ -118,7 +115,7 @@ def actualizar_autor(request, autor_id):
             return HttpResponseRedirect('/biblioteca/autores/listado')
     else:
         form = ActualizarAutor(instance = autor)
-    return render(request, 'actualizar_autor.html', {"form": form})
+    return render(request, 'autor/actualizar_autor.html', {"form": form})
 
 # funcion de Luis
 def activar_registro_autor(request, autor_id):
@@ -126,7 +123,6 @@ def activar_registro_autor(request, autor_id):
     autor.activo = True
     autor.save()
     return redirect("listado_autores")
-
 
 # funcion de Luis Alberto
 def desactivar_registro_socio(request, socio_id):
@@ -138,7 +134,7 @@ def desactivar_registro_socio(request, socio_id):
 # Andrea
 def reg_nuevAutores(request):
     if request.method == 'GET':
-        return render(request, 'nuevo_autor.html', {
+        return render(request, 'autor/nuevo_autor.html', {
             'formularioautor': CrearNuevoAutor()
         })
     else:
@@ -159,7 +155,7 @@ def reg_nuevAutores(request):
 # Andrea
 def reg_nuevSocios(request):
     if request.method == 'GET':
-        return render(request, 'nuevo_socio.html', {
+        return render(request, 'socio/nuevo_socio.html', {
             'formulario_socio': CrearNuevoSocio()
         })
     else:
@@ -189,7 +185,7 @@ def listado_prestamolibro(request):
     context = {
         "prestamos": prestamos,
     }
-    return render(request, "prestamos_lista.html", context) #chequear nombre
+    return render(request, "prestamo/prestamos_lista.html", context) #chequear nombre
 
 #Nai
 def actualizar_libro(request, libro_id:int):
@@ -201,7 +197,7 @@ def actualizar_libro(request, libro_id:int):
             return HttpResponseRedirect('/biblioteca/libro/listado')
     else:
         form = ActualizarLibro(instance = libro)
-    return render(request, 'actualizar_libro.html', {"form": form})
+    return render(request, 'libro/actualizar_libro.html', {"form": form})
 
 #Nai
 def desactivar_libro(request, libro_id:int):
@@ -215,7 +211,7 @@ def nuevo_prestamo_libro(request):
     if request.method == 'POST':
         form = CrearNuevoPrestamo(request.POST)
         if form.is_valid():
-            fecha_prestamo = form.cleaned_data['fecha_prestamos']
+            fecha_prestamo = datetime.now() # Registrar la fecha actual al crear un prestamo
             fecha_devolucion =fecha_prestamo + timedelta(days=2)
             socio = form.cleaned_data['socio']
             empleado = form.cleaned_data['empleado']
@@ -234,7 +230,7 @@ def nuevo_prestamo_libro(request):
     else:
         form = CrearNuevoPrestamo()
 
-    return render(request, 'prestamo_libro.html',{"form": form})
+    return render(request, 'prestamo/prestamo_libro.html',{"form": form})
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
@@ -252,9 +248,18 @@ def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
             return HttpResponseRedirect('/biblioteca/prestamos/listado')
     else:
         form = ActualizarPrestamo(instance = prestamo)
-    return render(request, 'actualiza_prestamo.html', {"formularioActualizarPrestamo": form})
+    return render(request, 'prestamo/actualiza_prestamo.html', {"formularioActualizarPrestamo": form})
 
+# Kev
 def nuevo_libro(request):
+    """Funcion que crea un nuevo libro y lo guarda en la base de datos.
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        redirec: Redirecciona al template listado_libros una vez creado el libro.
+    """
     if request.method == 'POST':
         form = CrearNuevoLibro(request.POST)
         if form.is_valid():
@@ -275,7 +280,7 @@ def nuevo_libro(request):
     else:
         form = CrearNuevoLibro()
 
-    return render(request, 'nuevo_libro.html', {"form": form})
+    return render(request, 'libro/nuevo_libro.html', {"form": form})
 
 #Andrea
 def eliminar_regPrestamo(request, prestamoLibro_id):
@@ -289,4 +294,4 @@ def listado_libro(request):
     context = {
         "libros": libros,
     }
-    return render(request, "libros_lista.html", context)
+    return render(request, "libro/libros_lista.html", context) 

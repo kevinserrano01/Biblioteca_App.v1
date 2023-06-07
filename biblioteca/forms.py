@@ -61,14 +61,55 @@ class ActualizarPrestamo(forms.ModelForm):
 
         
 class CrearNuevoPrestamo(forms.Form):
-    fecha_prestamos = forms.DateField(
-        label='Fecha Prestamo (YYYY-MM-DD)'
-    )
-    #fecha_devolucion=forms.DateField(label='Fecha Devolucion (YYYY-MM-DD)')
     socio = forms.ModelChoiceField(label='Socio', queryset=Socio.objects.filter(activo=True))
     empleado = forms.ModelChoiceField(label='Empleado', queryset=Empleado.objects.filter(activo=True))
     libro = forms.ModelChoiceField(label='Libro', queryset=Libro.objects.filter(activo=True))
-      
+
+# Otra forma de crear un nuevo prestamo es de la siguiente manera:
+# class CrearNuevoPrestamo(forms.ModelForm):
+    """Lo que hace esto es crear un nuevo prestamo pero con la fecha actual del sistema."""
+#     class Meta:
+#         model = Empleado
+#         fields = '__all__'
+        
+#     def __init__(self, *args, **kwargs):
+#         super(CrearNuevoPrestamo, self).__init__(*args, **kwargs)
+#         self.fields['fecha_prestamos'].initial = datetime.now()
+
+
+
+'''
+def clean_libro(self):
+        lista_prestamos =   PrestamoLibro.objects.all()
+        for prestamo in lista_prestamos:
+            print(prestamo)
+'''
+    
+'''
+    from django.core.exceptions import ValidationError
+from django.db.models import Q
+
+class PrestamoLibro(models.Model):
+    # ...
+
+  def clean(self):
+        # Validar que no existan préstamos para el mismo libro en las mismas fechas
+        prestamos_existentes = PrestamoLibro.objects.filter(
+            libro=self.libro,
+            Q(fecha_prestamos_lte=self.fecha_prestamos, fecha_devolucion_gte=self.fecha_prestamos) |
+            Q(fecha_prestamos_lte=self.fecha_devolucion, fecha_devolucion_gte=self.fecha_devolucion) |
+            Q(fecha_prestamos_gte=self.fecha_prestamos, fecha_devolucion_lte=self.fecha_devolucion)
+        ).exclude(pk=self.pk)  # Excluir el préstamo actual si se está editando
+
+        if prestamos_existentes.exists():
+            raise ValidationError("El libro ya ha sido prestado en las mismas fechas.")
+
+        # Validar que la fecha de devolución sea posterior a la fecha de préstamo
+        if self.fecha_devolucion <= self.fecha_prestamos:
+            raise ValidationError("La fecha de devolución debe ser posterior a la fecha de préstamo.")
+      '''
+
+
 class ActualizarLibro(forms.ModelForm): #Nai
     #autores = forms.ModelChoiceField(label='Autor', queryset=Autor.objects.filter(activo=True))
     class Meta:
