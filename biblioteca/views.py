@@ -191,35 +191,6 @@ def listado_prestamolibro(request):
     }
     return render(request, "prestamos_lista.html", context) #chequear nombre
 
-# Kev
-# def nuevo_libro(request):
-#     """Funcion que crea un nuevo libro y lo guarda en la base de datos.
-
-#     Args:
-#         request (_type_): _description_
-
-#     Returns:
-#         redirec: Redirecciona al template listado_libros una vez creado el libro.
-#     """
-    # if request.method == 'GET':
-    #     return render(request, 'nuevo_libro.html', {
-    #         'formulario_libro': CrearNuevoLibro()
-    #     })
-    # else:
-    #     tituloLibro=request.POST['titulo']
-    #     descripcionLibro=request.POST['descripcion']
-    #     isbnLibro=request.POST['isbn']
-    #     autorLibro=request.POST['autor']
-
-    #     Libro.objects.create(
-    #         titulo = tituloLibro,
-    #         descripcion = descripcionLibro,
-    #         isbn = isbnLibro,
-    #         autor = autorLibro
-    #     )
-    # return redirect('listado_libros')
-
-
 #Nai
 def actualizar_libro(request, libro_id:int):
     libro = get_object_or_404(Libro, id=libro_id)
