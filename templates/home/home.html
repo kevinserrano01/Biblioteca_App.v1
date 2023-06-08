@@ -7,24 +7,40 @@
 
 {% block content %}
 <main>
-    <section class="container">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mt-1">
-            <div class="col-10 col-sm-8 col-lg-6">
-                <img src="../static/img/biblioteca-home.jpg" class="mx-lg-auto img-fluid " alt="Imagen de biblioteca" width="700" height="500" loading="lazy">
-            </div>
-            <div class="col-lg-6">
-                <h1 class="display-5 fw-bold lh-1 mb-3 color-blue">ReadMe</h1>
-                <p class="lead">La aplicación ReadMe es la herramienta para la gestión eficiente y organizada de tu biblioteca. Diseñada pensando en bibliotecarios y administradores, ReadMe simplifica y automatiza todos los aspectos del proceso de gestión de una biblioteca.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <a href="{% url 'listado_prestamolibro' %}"> 
-                        <button class="btn btn-book btn-lg px-4 me-md-2">Libros</button>
-                    </a>
-                    <a href="{% url 'listado_socios' %}">
-                        <button href="{% url 'listado_socios' %}" type="button" class="btn btn-partner btn-lg px-4">Socios</button>
-                    </a>
+    <div class="position-relative overflow-hidden">
+        <div class="d-flex min-vh-100" lc-helper="video-bg">
+            <video style="z-index:1;object-fit: cover; object-position: 50% 50%;" class="position-absolute w-100 min-vh-100" autoplay="" preload="" muted="" loop="" playsinline="">
+                <!-- adjust object-position to tweak cropping on mobile -->
+                <source src={% static 'video/biblioteca.mp4'%} type="video/mp4">
+            </video>
+            <div style="z-index:2" class="align-self-center text-center text-light col-md-8 offset-md-2">
+                <div class="lc-block mb-4">
+                    <div editable="rich">
+                        <h1 class="display-1 fw-bolder">ReadMe</h1>
+                    </div>
+                </div>
+    
+                <div class="lc-block">
+                    <div editable="rich">
+                        <p class="fw-semibold fs-4 text">La plataforma intuitiva para administrar tus libros y préstamos con facilidad.</p>
+    
+                        <p class="fw-semibold fs-4 text">Diseñada para bibliotecarios, empleados y socios.</p>
+    
+                    </div>
+                </div>
+    
+                <div class="lc-block">
+                    <svg onclick="this.closest('section').nextElementSibling.scrollIntoView({ behavior: 'smooth'  });" width="4em" height="4em" viewBox="0 0 16 16" lc-helper="svg-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="">
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"></path>
+                    </svg>
+    
+                    <!-- for Safari support only, remove if you want  -->
+                    <script async="" src="https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.min.js"></script>
+    
                 </div>
             </div>
-            </div>
-    </section>  
+        </div>
+    </div> 
 </main>
 {% endblock %}
