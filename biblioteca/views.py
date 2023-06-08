@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from biblioteca.models import Autor, Empleado, Socio, Libro, PrestamoLibro
 from django.shortcuts import render, redirect
-from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamo, CrearNuevoLibro
+from biblioteca.forms import CrearNuevoEmpleado, ActualizarAutor, ActualizarEmpleado, CrearNuevoAutor, CrearNuevoSocio, ActualizarSocio, CrearNuevoPrestamo, ActualizarLibro, ActualizarPrestamo, CrearNuevoLibro
 from django.http import HttpResponseRedirect
 from datetime import timedelta, datetime
 
@@ -19,18 +19,15 @@ def desactivar_Registro_Empleado(request, empleado_id):
 
 # funcion de Luis
 def actualizar_empleado(request, empleado_id):
-    empleado = get_object_or_404(Empleado, pk=empleado_id)   
+    empleado = get_object_or_404(Empleado, id=empleado_id)
     if request.method == "POST":
-        empleado.nombre = request.POST["nombre"]
-        empleado.apellido = request.POST["apellido"]
-        empleado.nro_legajo = request.POST["numero_legajo"]
-        empleado.activo = True if request.POST.get("activo") == "on" else False
-        empleado.save()
-
-    context = {
-            'empleado': empleado,
-        }
-    return render(request, "empleado/formulario_actualizar_empleado.html", context)
+        form = ActualizarEmpleado(request.POST, instance = empleado)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/biblioteca/empleados/listado')
+    else:
+        form = ActualizarEmpleado(instance = empleado)
+    return render(request, 'empleado/formulario_actualizar_empleado.html', {"formularioActualizarEmpleado": form})
 
 def listado_empleados(request):
     empleados=Empleado.objects.all()
@@ -59,7 +56,12 @@ def nuevo_empleado(request):
         apellidoEmpleado = request.POST['apellido']
         legajoEmpleado = request.POST['nro_legajo']
         activos = True
-        Empleado.objects.create(nombre=nombreEmpleado, apellido=apellidoEmpleado, nro_legajo=legajoEmpleado, activo=activos)
+        Empleado.objects.create(
+            nombre=nombreEmpleado,
+            apellido=apellidoEmpleado,
+            nro_legajo=legajoEmpleado,
+            activo=activos
+        )
         return redirect('listado_empleados')  # redirecciona a la url con el name='listado_empleados' en urls.py
 
 # Funcion de Gus (desactivar autor)
@@ -230,7 +232,7 @@ def nuevo_prestamo_libro(request):
     else:
         form = CrearNuevoPrestamo()
 
-    return render(request, 'prestamo/prestamo_libro.html',{"form": form})
+    return render(request, 'prestamo/prestamo_libro.html',{"formularioNuevoPrestamo": form})
 
 # Kev
 def actualizar_Prestamo_Libro(request, prestamoLibro_id:int):
@@ -280,7 +282,7 @@ def nuevo_libro(request):
     else:
         form = CrearNuevoLibro()
 
-    return render(request, 'libro/nuevo_libro.html', {"form": form})
+    return render(request, 'libro/nuevo_libro.html', {"formularioLibro": form})
 
 #Andrea
 def eliminar_regPrestamo(request, prestamoLibro_id):
