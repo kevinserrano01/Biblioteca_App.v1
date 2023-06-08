@@ -49,6 +49,11 @@
                                 </a>
                             
                         </tr>
+                        <!-- Mostrar algo si el objeto esta vacio -->
+                        {% empty %}
+                        <div class="alert alert-danger " role="alert">
+                            Sin prestamos...
+                        </div>
                 {% endfor %}
             </table>
 

@@ -28,11 +28,11 @@ select{
 
 .gradient-custom {
     /* fallback for old browsers */
-    background: #6a11cb;
+    background: #79470ef1;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    background: -webkit-linear-gradient(to right, rgb(148, 97, 3), rgb(141, 75, 0));
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    background: linear-gradient(to right, rgba(175, 106, 3, 0.87), rgb(199, 115, 4))
     }
