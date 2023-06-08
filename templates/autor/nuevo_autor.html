@@ -1,56 +1,35 @@
 {% extends 'home/navbar.html' %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'styles/autor.css' %}">
+
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'styles/forms.css' %}">
+{% endblock estilos %}
 
 {% block content %}
-<section class="gradient-custom">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card bg-dark text-white" style="border-radius: 1rem;">
-          <div class="card-body p-5 text-center">
-
-            <div class="mb-md-5 mt-md-4 pb-5">
-
-              <h2 class="fw-bold mb-2 text-uppercase">Crear Nuevo Autor</h2>
-              
-              <label for="text">ingrese los datos de un nuevo autor</label>
-              <br>
-              <br>
-              <form method="post" >
-                {% csrf_token %}
-                <div class="form-outline form-white mb-4">
-                    <label class="form-label" for="{{ formularioautor.nombre.id_for_label }}" style="border-radius: 1rem;">Nombre del autor</label>
-                  {{ formularioautor.nombre }}
-
+    <form method="post" class="form-control text-center">
+        {% csrf_token %}
+        <section class="vh-100 gradient-custom">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+                                <div class="mb-md-5 mt-md-4 pb-5">
+                                    <h2 class="fw-bold mb-2 text-uppercase">Crear nuevo autor</h2>
+                                    <p class="text-white-50 mb-5">Ingrese los datos del nuevo autor</p>
+                                    {{ formularioautor.as_p }}
+                                    <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Guardar</button>
+                                </div>
+                                <div>
+                                    <hr>
+                                    <p class="mb-0">No desea agregar un nuevo autor? <a href="{% url 'listado_autores' %}" class="text-white-50 fw-bold">Volver al listado</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-outline form-white mb-4">
-                    <label class="form-label" for="{{ formularioautor.apellido.id_for_label }}">Apellido del autor</label>
-                  {{ formularioautor.apellido }}
-                  
-                </div>
-
-                <div class="form-outline form-white mb-4 rounded">
-                    <label class="form-label rounded" for="{{ formularioautor.nacionalidad.id_for_label }}">Nacionalidad</label>
-                  {{ formularioautor.nacionalidad }}
-        
-                </div>
-
-                <button type="submit" class="btn btn-outline-light mt-4">Guardar</button>
-              </form>
-
-              <a href="{% url 'listado_autores' %}">
-                <button type="button" class="btn btn-outline-light mt-4">Volver al listado</button>
-              </a>
-
             </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
+    </form>
 {% endblock %}
