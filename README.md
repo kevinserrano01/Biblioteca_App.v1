@@ -1,9 +1,14 @@
 
-# Biblioteca app 
+# 📚 BIBLIOTECA APP
 
 ¡Bienvenido a la Biblioteca App! Esta aplicación es una solución completa para gestionar una biblioteca, permitiendo realizar un seguimiento de los socios, autores, empleados, libros y préstamos de libros.
+## Vista previa de inicio
+![App Screenshot](https://i.pinimg.com/originals/e0/4b/3e/e04b3ee3945e459f46ed2fe257058849.png)
 
-# Características principales
+## Vista previa de prestamo libro
+![App Screenshot](https://i.pinimg.com/originals/f7/0d/5f/f70d5f4729a90825b20a3755bef4ca32.png)
+
+# 🔵 Características principales
 
 * **Gestión de socios:** Registra a los socios de la biblioteca, incluyendo su información personal y detalles de contacto.
 * **Gestión de autores:** Mantén un registro de los autores de los libros presentes en la biblioteca.
@@ -15,12 +20,12 @@
 
 
 
-# Licencia
+# 🔵 Licencia
 Este proyecto fue creado por Squad2.py 2023.
 
 ¡Esperamos que disfrutes utilizando la README App! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
 
-# Requisitos de instalación
+# 🔵 Requisitos de instalación
 
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
@@ -36,7 +41,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 * JavaScript
 * SQL
 
-# Configuración para Windows 
+# 🔵 Configuración para Windows 
 
 * Clona este repositorio en tu máquina local.
 * Crea una carpeta env fuera de la carpeta del proyecto  
@@ -47,7 +52,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 * Inicia el servidor de desarrollo local con: **python manage.py runserver**.
 * Accede a la aplicación en tu navegador web ingresando la URL http://localhost:8000.
 
-# Configuración para Linux 
+# 🔵 Configuración para Linux 
 
 * Clona este repositorio en tu máquina local.
 * Crea una carpeta env fuera de la carpeta del proyecto  
@@ -60,7 +65,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 Estos pasos son similares a los de Windows, pero algunos comandos pueden variar ligeramente en Linux. Asegúrate de tener instalado Python 3 en tu sistema antes de seguir estos pasos.
     
-## Colaboradores
+## 👥 Colaboradores
 
 - [@Andrea Chungara](https://www.github.com/AndreaChungara)
 - [@Gustavo Ledesma](https://www.github.com/GusLed1870)
@@ -68,7 +73,7 @@ Estos pasos son similares a los de Windows, pero algunos comandos pueden variar 
 - [@kevin Serrano](https://www.github.com/kevinserrano01)
 - [@Luis Quiroga](https://www.github.com/LuisQN)
 
-## Contribuciones
+## 🔵 Contribuciones
 
 Si deseas contribuir a la Biblioteca Readme, por favor sigue estos pasos:
 
@@ -78,7 +83,7 @@ Si deseas contribuir a la Biblioteca Readme, por favor sigue estos pasos:
 * Envía tus cambios al repositorio remoto: git push origin mi-nueva-funcion.
 Abre una pull request en este repositorio principal.
 
-## Documentación de la API
+## 🔵 Documentación de la API
 
 #### Para obtener todos los libro
 
@@ -91,7 +96,7 @@ Abre una pull request en este repositorio principal.
 | `api_key` | `string` | **Required**. Your API key |
 
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://i.pinimg.com/originals/ed/cd/47/edcd4782c0cb9579dc69941a96d4dbba.png)
 
 #### Get item
 
@@ -105,12 +110,12 @@ Abre una pull request en este repositorio principal.
 
 
 
-## Screenshots
+## 📸 Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://i.pinimg.com/originals/a1/25/9a/a1259a126ae19df9e207d8a080398407.png)
 
 
-## Documentation
+## 🔵 Documentation
 
 [Documentation](https://linktodocumentation)
 
