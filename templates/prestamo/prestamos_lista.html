@@ -1,8 +1,14 @@
 {% extends 'home/navbar.html' %}
 
+{% load static %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'styles/list.css' %}">
+{% endblock estilos %}
+
 {% block content %}
-<div class="container">
-    <h1 class="text-center">Listado de Préstamos de Libros</h1>
+<div class="container py-5">
+    <h1 class="text-center f-color">Listado de Préstamos de Libros</h1>
     <div class="row">
         <div class="colum">
             <table border="1" class="table table-striped container mt-2">
@@ -59,7 +65,7 @@
         </div>
     </div>
     <div >
-        <a class="d-grid gap-2 btn btn-success " href="{% url 'nuevo_prestamo_libros' %}">
+        <a class="d-grid gap-2 btn btn-color " href="{% url 'nuevo_prestamo_libros' %}">
             Agregar nuevo
         </a>
     </div>
