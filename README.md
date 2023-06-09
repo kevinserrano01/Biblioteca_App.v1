@@ -1,5 +1,5 @@
 
-# Readme app 
+# Biblioteca app 
 
 ¡Bienvenido a la Biblioteca App! Esta aplicación es una solución completa para gestionar una biblioteca, permitiendo realizar un seguimiento de los socios, autores, empleados, libros y préstamos de libros.
 
@@ -16,7 +16,7 @@
 
 
 # Licencia
-Este proyecto está licenciado bajo la ALKEMY.
+Este proyecto fue creado por Squad2.py 2023.
 
 ¡Esperamos que disfrutes utilizando la README App! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
 
@@ -60,7 +60,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 Estos pasos son similares a los de Windows, pero algunos comandos pueden variar ligeramente en Linux. Asegúrate de tener instalado Python 3 en tu sistema antes de seguir estos pasos.
     
-## Autores
+## Colaboradores
 
 - [@Andrea Chungara](https://www.github.com/AndreaChungara)
 - [@Gustavo Ledesma](https://www.github.com/GusLed1870)
