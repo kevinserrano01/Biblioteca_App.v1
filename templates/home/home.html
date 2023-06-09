@@ -8,28 +8,37 @@
 
 {% block content %}
 <main>
-    <section class="container">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mt-1">
-            <div class="col-10 col-sm-8 col-lg-6">
-                <img src="../static/img/biblioteca-home.jpg" class="mx-lg-auto img-fluid " alt="Imagen de biblioteca"
-                    width="700" height="500" loading="lazy">
-            </div>
-            <div class="col-lg-6">
-                <h1 class="display-5 fw-bold lh-1 mb-3 color-blue">ReadMe</h1>
-                <p class="lead">La aplicación ReadMe es la herramienta para la gestión eficiente y organizada de tu
-                    biblioteca. Diseñada pensando en bibliotecarios y administradores, ReadMe simplifica y automatiza
-                    todos los aspectos del proceso de gestión de una biblioteca.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <a href="{% url 'listado_prestamolibro' %}">
-                        <button class="btn btn-book btn-lg px-4 me-md-2">Libros</button>
-                    </a>
-                    <a href="{% url 'listado_socios' %}">
-                        <button href="{% url 'listado_socios' %}" type="button"
-                            class="btn btn-partner btn-lg px-4">Socios</button>
+    <div class="position-relative overflow-hidden">
+        <div class="d-flex min-vh-100" lc-helper="video-bg">
+            <video style="z-index:1;object-fit: cover; object-position: 50% 50%;" class="position-absolute w-100 min-vh-100" autoplay="" preload="" muted="" loop="" playsinline="">
+                <!-- adjust object-position to tweak cropping on mobile -->
+                <source src={% static 'video/tech2.mp4' %} type="video/mp4">
+            </video>
+            <div style="z-index:2" class="align-self-center text-center text-light col-md-8 offset-md-2">
+                <div class="lc-block mb-4">
+                    <div editable="rich">
+                        <h1 class="display-1 fw-bolder">ReadMe</h1>
+                    </div>
+                </div>
+    
+                <div class="lc-block">
+                    <div editable="rich">
+                        <p class="fw-semibold fs-4 text">La plataforma intuitiva para administrar tus libros y préstamos con facilidad.</p>
+    
+                        <p class="fw-semibold fs-4 text">Diseñada para bibliotecarios, empleados y socios.</p>
+    
+                    </div>
+                </div>
+    
+                <div class="lc-block">
+                    <a href="#" class="btn" role="button" data-bs-toggle="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                        </svg>
                     </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div> 
 </main>
 {% endblock %}
