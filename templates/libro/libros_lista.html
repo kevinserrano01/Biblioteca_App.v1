@@ -1,21 +1,27 @@
 {% extends 'home/navbar.html' %}
 
+{% load static %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'styles/list.css' %}">
+{% endblock estilos %}
+
 {% block content %}
-<div class="container">
-    <h1 class="text-center">Listado Libros</h1>
+<div class="container py-5">
+    <h1 class="text-center ">Listado Libros</h1>
     <div class="row">
         <div class="colum">
             <table border="1" class="table table-striped container mt-2">
                 <tr>
                     <th scope="col"> ID </th>
-                    <th scope="col"> Titulo </th>
-                    <th scope="col"> Descripcion </th>
+                    <th scope="col"> Título </th>
+                    <th scope="col"> Descripción </th>
                     <th scope="col"> Isbn </th>
                     <th scope="col"> Autor </th>
                     <th scope="col"> Estado </th>
                     <th scope="col">  </th>
                     <th scope="col">  </th>
-                    <th scope="col">  </th>
+
                 </tr>
                 <!-- MOSTRAR DATOS DE LA BASE DE DATOS EN EL HTML -->
                 {% for libro in libros %}
@@ -58,14 +64,7 @@
                             {% endif %}
                             
                         </td>
-                        <td>
-                            <a href="{% url 'detalle_libro' libro.id %}">
-                                <button type="button" class="btn btn-dark rounded-pill">
-                                    Json
-                                </button>
-                            </a>
-                            
-                        </td>
+                
                     </tr>
                     <!-- Mostrar algo si el objeto esta vacio -->
                     {% empty %}
@@ -78,18 +77,14 @@
         </div>
     </div>
 
-    <div class="col-10">
+    <div class="col-12">
         <div class="row">
-            <div class="col-6">
-                <a class="d-grid gap-2 btn btn-success" href="{% url 'nuevo_libro' %}">
+            <div class="col-12">
+                <a class="d-grid gap-2 btn btn-color" href="{% url 'nuevo_libro' %}">
                     Nuevo libro
                 </a>
             </div>
-            <div class="col-6">
-                <a class="d-grid gap-2 btn btn-dark" href="{% url 'listado_libros' %}">
-                    List: JSON
-                </a>
-            </div>
+
         </div>
     </div>
 

@@ -3,6 +3,15 @@ body{
     padding: 0;
 }
 
-.nav-link{
-    color: white;
+.color-navbar {
+    background: #0A0820;
+}
+
+.f-color{
+    color: #0A0820;
+}
+
+.icon-color:hover {
+    color: #1c95d7;
+    transition: 1s;
 }
