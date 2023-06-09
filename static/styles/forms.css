@@ -26,13 +26,13 @@ select{
     padding: 0;
 }
 
+.bg-color {
+    background: #0A0820;
+}
+
 .gradient-custom {
-    /* fallback for old browsers */
-    background: #6a11cb;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-    }
+
+    background: rgb(10,8,32);
+    background: linear-gradient(90deg, rgba(10,8,32,1) 0%, rgba(19,92,160,1) 28%, rgba(28,149,215,1) 55%, rgba(28,149,215,1) 100%);
+
+}
