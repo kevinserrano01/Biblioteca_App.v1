@@ -33,7 +33,7 @@ class Autor(models.Model):
 #Modelo libro byGus
 class Libro(models.Model):
     titulo=models.CharField(max_length=80) 
-    descripcion=models.CharField(max_length=180) 
+    descripcion=models.CharField(max_length=800)
     isbn=models.IntegerField(default=0)
     autor=models.ForeignKey(
         Autor,
