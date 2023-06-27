@@ -1,6 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 WebApp\__pycache__
+WebApp\__pycache__
+WebApp\__pycache__
 WebApp/__pycache__/settings.cpython-311.pyc
 WebApp/__pycache__
 *.py[cod]
