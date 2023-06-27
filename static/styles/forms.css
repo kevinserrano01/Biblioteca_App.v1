@@ -1,0 +1,38 @@
+label{
+    font-size: 32px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+input{
+    font-size: 30px;
+    border-radius: 30px;
+}
+
+#id_libro{
+    font-size: 20px;
+}
+
+#id_activo{
+    font-size: 50px;
+}
+
+select{
+    font-size: 30px;
+    border-radius: 30px;
+}
+
+.form-control {
+    margin: 0;
+    padding: 0;
+}
+
+.bg-color {
+    background: #0A0820;
+}
+
+.gradient-custom {
+
+    background: rgb(10,8,32);
+    background: linear-gradient(90deg, rgba(10,8,32,1) 0%, rgba(19,92,160,1) 28%, rgba(28,149,215,1) 55%, rgba(28,149,215,1) 100%);
+
+}
